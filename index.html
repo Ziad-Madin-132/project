@@ -1,0 +1,5025 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#090c10">
+  <meta name="description" content="أثر — المنظومة الشاملة لإدارة استوديو الإنتاج الفني وحجوزات التسجيل الصوتي والإنشاد">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>أَثَر | استوديو الإنتاج الفني والتسجيل الصوتي</title>
+
+  <!-- Google Fonts: Cairo (Titles) & Tajawal (Body) with System Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- SheetJS for Native Excel (.xlsx) Generation -->
+  <script src="xlsx.full.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES & LUXURY STUDIO PALETTE
+       ========================================================================== */
+    :root {
+      --font-heading: 'Cairo', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
+      --font-body: 'Tajawal', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
+      
+      /* Dark Studio Edition (Default) */
+      --bg-base: #080b0f;
+      --bg-surface: #121721;
+      --bg-surface-elevated: #18202d;
+      --bg-surface-hover: #202b3c;
+      --border-subtle: #222d3e;
+      --border-highlight: #35455f;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-faint: #64748b;
+      
+      --gold-primary: #e5b869;
+      --gold-light: #fbe2a8;
+      --gold-dark: #b88636;
+      --gold-glow: rgba(229, 184, 105, 0.28);
+      
+      --emerald-accent: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --crimson-accent: #ef4444;
+      --crimson-glow: rgba(239, 68, 68, 0.25);
+      --blue-accent: #38bdf8;
+      --purple-accent: #a855f7;
+      --amber-accent: #f59e0b;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 9999px;
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+      --shadow-gold: 0 8px 30px rgba(229, 184, 105, 0.25);
+      
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Light Studio Edition (Warm Ivory Luxury) */
+    [data-theme="light"] {
+      --bg-base: #f5f2eb;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #fcfbf8;
+      --bg-surface-hover: #f1ede4;
+      --border-subtle: #e2dbcc;
+      --border-highlight: #cebfab;
+      
+      --text-main: #141c19;
+      --text-muted: #57645f;
+      --text-faint: #8a9691;
+      
+      --gold-primary: #b78335;
+      --gold-light: #d69f49;
+      --gold-dark: #8c5e1c;
+      --gold-glow: rgba(183, 131, 53, 0.18);
+      
+      --emerald-accent: #059669;
+      --emerald-glow: rgba(5, 150, 105, 0.15);
+      --crimson-accent: #dc2626;
+      --crimson-glow: rgba(220, 38, 38, 0.15);
+      --blue-accent: #0284c7;
+      --purple-accent: #9333ea;
+      --amber-accent: #d97706;
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+      --shadow-gold: 0 8px 30px rgba(183, 131, 53, 0.15);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-image: radial-gradient(circle at 15% 15%, rgba(229, 184, 105, 0.03) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.03) 0%, transparent 40%);
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--border-highlight); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    
+    button, input, select, textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+    
+    button {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      outline: none;
+      transition: var(--transition);
+    }
+    
+    input, select, textarea {
+      outline: none;
+      transition: var(--transition);
+    }
+
+    /* ==========================================================================
+       2. LOGIN PORTAL (SECURE STUDIO ENTRANCE)
+       ========================================================================== */
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #080b0f url("cover.webp") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    
+    .splash::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center 35%, rgba(12, 15, 20, 0.75) 0%, rgba(8, 11, 15, 0.95) 70%, #080b0f 100%);
+      pointer-events: none;
+    }
+    
+    .login-card {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 460px);
+      background: rgba(18, 24, 34, 0.9);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 36px 30px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85), 0 0 35px rgba(229, 184, 105, 0.12);
+      backdrop-filter: blur(18px);
+      text-align: center;
+      color: #fff;
+      animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    .login-brand-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+      color: #171105;
+      font-family: var(--font-heading);
+      font-size: 34px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      box-shadow: var(--shadow-gold);
+      position: relative;
+    }
+    .login-brand-icon::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: calc(var(--radius-md) + 4px);
+      border: 1px dashed rgba(229, 184, 105, 0.5);
+      animation: rotateSlow 15s linear infinite;
+    }
+
+    @keyframes rotateSlow {
+      to { transform: rotate(360deg); }
+    }
+
+    .login-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .login-title span {
+      background: linear-gradient(135deg, #fbe2a8, #e5b869, #b88636);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .login-sub {
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 22px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: right;
+    }
+
+    .login-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .login-input-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .login-input-wrapper {
+      position: relative;
+    }
+    .login-input-wrapper input {
+      width: 100%;
+      background: rgba(10, 14, 20, 0.75);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: var(--radius-md);
+      padding: 13px 14px 13px 40px;
+      color: #ffffff;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    .login-input-wrapper input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(229, 184, 105, 0.25);
+      background: rgba(14, 19, 28, 0.95);
+    }
+    .login-input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-primary);
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-remember-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #cbd5e1;
+      padding: 2px 0;
+    }
+    .login-remember-row label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .login-remember-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold-primary);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+      color: #120e06;
+      font-size: 15px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px rgba(229, 184, 105, 0.35);
+      margin-top: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(229, 184, 105, 0.5);
+    }
+
+    .login-error-alert {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+      animation: shake 0.3s ease;
+    }
+
+    .login-hint-card {
+      margin-top: 18px;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(229, 184, 105, 0.35);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      color: #e2e8f0;
+      text-align: right;
+    }
+    .hint-title {
+      font-weight: 800;
+      color: var(--gold-primary);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hint-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #94a3b8;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .hint-row b {
+      color: #ffffff;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    .btn-fill-creds {
+      width: 100%;
+      padding: 7px 12px;
+      background: rgba(229, 184, 105, 0.15);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: var(--radius-sm);
+      color: var(--gold-primary);
+      font-size: 11px;
+      font-weight: 800;
+      transition: var(--transition);
+    }
+    .btn-fill-creds:hover {
+      background: rgba(229, 184, 105, 0.28);
+    }
+
+    .btn-guest-login {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #94a3b8;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .btn-guest-login:hover {
+      color: #ffffff;
+    }
+
+    .splash.hide {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    /* ==========================================================================
+       3. TOPBAR & STUDIO NAV
+       ========================================================================= */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px clamp(14px, 3.5vw, 36px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+      color: #171105;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: var(--shadow-gold);
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .brand-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--emerald-accent);
+      background: rgba(16, 185, 129, 0.12);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .studio-eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+      padding: 0 4px;
+    }
+    .eq-bar {
+      width: 3px;
+      background: var(--gold-primary);
+      border-radius: 2px;
+      animation: eqBounce 1.2s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 85%; animation-delay: 0.3s; }
+    .eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+    .eq-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
+    .eq-bar:nth-child(5) { height: 50%; animation-delay: 0.15s; }
+
+    @keyframes eqBounce {
+      0% { height: 20%; opacity: 0.4; }
+      100% { height: 100%; opacity: 1; }
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 13px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .topbar-btn:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-highlight);
+      transform: translateY(-1px);
+    }
+
+    .topbar-btn.primary {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      color: #171105;
+      border: none;
+      font-weight: 800;
+      box-shadow: var(--shadow-gold);
+    }
+    .topbar-btn.primary:hover {
+      filter: brightness(1.08);
+    }
+
+    .topbar-btn.excel-action {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--emerald-accent);
+      color: #34d399;
+      font-weight: 800;
+    }
+    .topbar-btn.excel-action:hover {
+      background: var(--emerald-accent);
+      color: #ffffff;
+      box-shadow: 0 4px 15px var(--emerald-glow);
+    }
+
+    .topbar-btn.on-air-pulse {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
+    .topbar-btn.logout {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #f87171;
+    }
+    .topbar-btn.logout:hover {
+      background: var(--crimson-accent);
+      color: #ffffff;
+    }
+    
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 10px #ef4444;
+      animation: pulseLive 1.5s infinite;
+    }
+
+    @keyframes pulseLive {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 14px #ef4444; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .clock-display {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      direction: ltr;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 6px;
+    }
+
+    /* ==========================================================================
+       4. MAIN CONTAINER & SECTION TABS
+       ========================================================================== */
+    .app-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 22px clamp(14px, 3.5vw, 36px) 60px;
+    }
+
+    .server-status-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 18px;
+      margin-bottom: 18px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
+    }
+    .server-status-strip b {
+      color: var(--gold-primary);
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .nav-tabs::-webkit-scrollbar {
+      height: 4px;
+    }
+    .nav-tabs::-webkit-scrollbar-thumb {
+      background: var(--border-highlight);
+      border-radius: 4px;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      white-space: nowrap;
+      transition: var(--transition);
+      position: relative;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-surface);
+    }
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      white-space: nowrap;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-highlight);
+      transform: translateY(-1px);
+    }
+    .tab-btn.active {
+      color: #171105;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      border-color: var(--gold-primary);
+      box-shadow: var(--shadow-gold);
+    }
+    .tab-btn.active .tab-badge {
+      background: #171105;
+      color: var(--gold-light);
+    }
+
+    .tab-badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: var(--border-subtle);
+      color: var(--text-muted);
+    }
+    .tab-btn.active .tab-badge {
+      background: var(--gold-primary);
+      color: #171105;
+      font-weight: 800;
+    }
+
+    /* ==========================================================================
+       5. KPI METRICS (EXECUTIVE SUMMARY)
+       ========================================================================== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-highlight);
+      box-shadow: var(--shadow-md);
+    }
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: transparent;
+    }
+    .kpi-card.gold::before { background: linear-gradient(90deg, var(--gold-primary), transparent); }
+    .kpi-card.emerald::before { background: linear-gradient(90deg, var(--emerald-accent), transparent); }
+    .kpi-card.amber::before { background: linear-gradient(90deg, var(--amber-accent), transparent); }
+    .kpi-card.crimson::before { background: linear-gradient(90deg, var(--crimson-accent), transparent); }
+    .kpi-card.blue::before { background: linear-gradient(90deg, var(--blue-accent), transparent); }
+    .kpi-card.purple::before { background: linear-gradient(90deg, var(--purple-accent), transparent); }
+
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+    }
+    .kpi-card.gold .kpi-icon { color: var(--gold-primary); background: rgba(229,184,105,0.12); }
+    .kpi-card.emerald .kpi-icon { color: var(--emerald-accent); background: rgba(16,185,129,0.12); }
+    .kpi-card.amber .kpi-icon { color: var(--amber-accent); background: rgba(245,158,11,0.12); }
+    .kpi-card.crimson .kpi-icon { color: var(--crimson-accent); background: rgba(239,68,68,0.12); }
+    .kpi-card.blue .kpi-icon { color: var(--blue-accent); background: rgba(59,130,246,0.12); }
+    .kpi-card.purple .kpi-icon { color: var(--purple-accent); background: rgba(139,92,246,0.12); }
+
+    .kpi-val {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 12px 0 4px;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .kpi-footer {
+      font-size: 11px;
+      color: var(--text-faint);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--bg-surface-elevated);
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--emerald-accent);
+      transition: width 0.5s ease;
+    }
+
+    /* ==========================================================================
+       6. MAIN LAYOUT (CONTENT + SIDEBAR)
+       ========================================================================== */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 420px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 1150px) {
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Screen Sub-Navigation Header Bar */
+    .screen-subnav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+    .subnav-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+    .subnav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Fast Form Presets Strip */
+    .form-presets-strip {
+      background: rgba(229, 184, 105, 0.08);
+      border: 1px dashed rgba(229, 184, 105, 0.35);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .preset-chips-wrap {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .preset-chip {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .preset-chip:hover {
+      background: var(--gold-primary);
+      color: #171105;
+      border-color: var(--gold-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Newly Added Row Flash Animation */
+    @keyframes newRowGlow {
+      0% { background: rgba(16, 185, 129, 0.32); box-shadow: 0 0 20px rgba(16, 185, 129, 0.45); }
+      50% { background: rgba(229, 184, 105, 0.25); box-shadow: 0 0 24px rgba(229, 184, 105, 0.5); }
+      100% { background: rgba(16, 185, 129, 0.1); box-shadow: none; }
+    }
+    .just-added-row {
+      animation: newRowGlow 3s ease-out !important;
+      border: 2px solid var(--emerald-accent) !important;
+      position: relative;
+    }
+    .new-booking-flash-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(135deg, var(--emerald-accent), #059669);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 2px 8px var(--emerald-glow);
+      margin-left: 6px;
+      animation: pulseLive 1.5s infinite;
+    }
+
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--bg-surface-elevated);
+    }
+    .panel-title {
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Filters Bar */
+    .filters-bar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--bg-surface);
+    }
+    .filters-main-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      flex: 2;
+      min-width: 220px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 38px 10px 14px;
+      color: var(--text-main);
+      font-size: 13px;
+    }
+    .search-box input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 15px;
+    }
+
+    .filter-select {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .filter-select:focus {
+      border-color: var(--gold-primary);
+    }
+
+    .quick-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip-btn {
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chip-btn:hover {
+      background: var(--bg-surface-hover);
+      color: var(--text-main);
+    }
+    .chip-btn.active {
+      background: rgba(229, 184, 105, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .view-switch {
+      display: inline-flex;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 2px;
+    }
+    .view-btn {
+      padding: 6px 10px;
+      border-radius: calc(var(--radius-sm) - 2px);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .view-btn.active {
+      background: var(--bg-surface);
+      color: var(--gold-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ==========================================================================
+       7. TABLE VIEW & STATUS SELECTOR
+       ========================================================================== */
+    .table-container {
+      overflow-x: auto;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+      white-space: nowrap;
+    }
+    table.data-table th {
+      background: var(--bg-surface-elevated);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    table.data-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+    }
+    table.data-table tbody tr:hover {
+      background: var(--bg-surface-hover);
+    }
+
+    .cell-client {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .client-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .client-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+    .maqam-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      margin-right: 4px;
+    }
+
+    .money-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .money-total {
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .money-rem {
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .money-rem.paid { color: var(--emerald-accent); }
+    .money-rem.due { color: var(--crimson-accent); }
+
+    .btn-quick-pay {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--emerald-accent);
+      font-weight: 700;
+    }
+    .btn-quick-pay:hover {
+      background: var(--emerald-accent);
+      color: #fff;
+    }
+
+    /* Interactive Status Badge (Click to Change) */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+    .status-badge:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+    .status-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-pending { background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25); }
+    .status-pending::before { background: #fbbf24; }
+
+    .status-confirmed { background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25); }
+    .status-confirmed::before { background: #34d399; }
+
+    .status-recording { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); animation: pulseRecord 1.5s infinite; }
+    .status-recording::before { background: #ef4444; }
+
+    .status-done { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25); }
+    .status-done::before { background: #60a5fa; }
+
+    .status-completed { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.25); }
+    .status-completed::before { background: #a78bfa; }
+
+    .status-cancelled { background: rgba(107, 114, 128, 0.15); color: #9ca3af; border: 1px solid rgba(107, 114, 128, 0.25); }
+    .status-cancelled::before { background: #9ca3af; }
+
+    @keyframes pulseRecord { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    .action-btn:hover {
+      background: var(--bg-surface-hover);
+      color: var(--text-main);
+      border-color: var(--border-highlight);
+    }
+    .action-btn.whatsapp:hover { background: #25d366; color: #ffffff; border-color: #25d366; }
+    .action-btn.invoice:hover { background: var(--gold-primary); color: #120e06; border-color: var(--gold-primary); }
+    .action-btn.delete:hover { background: var(--crimson-accent); color: #ffffff; border-color: var(--crimson-accent); }
+
+    /* ==========================================================================
+       8. CARDS GRID VIEW
+       ========================================================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+    .booking-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .booking-card:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-client-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .card-client-phone {
+      font-size: 12px;
+      color: var(--text-muted);
+      direction: ltr;
+      display: inline-block;
+    }
+    .card-body-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 12px;
+      padding: 10px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .card-info-item label {
+      display: block;
+      color: var(--text-faint);
+      font-size: 11px;
+    }
+    .card-info-item b {
+      color: var(--text-main);
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       9. FORM PANEL (ADD / EDIT BOOKING)
+       ========================================================================== */
+    .form-panel {
+      padding: 22px;
+    }
+    .form-panel-head {
+      margin-bottom: 18px;
+    }
+    .form-panel-head h3 {
+      font-size: 18px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-panel-head p {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .col-span-2 {
+      grid-column: 1 / -1;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-control {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-size: 13px;
+    }
+    .form-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
+
+    .conflict-alert {
+      display: none;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #f87171;
+      font-size: 12px;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .conflict-alert.show {
+      display: block;
+      animation: shake 0.3s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+
+    .money-calc-box {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .money-calc-item { text-align: center; }
+    .money-calc-item span { display: block; font-size: 11px; color: var(--text-muted); }
+    .money-calc-item strong { font-size: 16px; color: var(--text-main); font-family: var(--font-heading); }
+    .money-calc-item.rem strong { color: var(--gold-primary); }
+
+    .form-actions-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn-submit {
+      flex: 2;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      color: #171105;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: var(--shadow-gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-submit:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-cancel {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .btn-cancel:hover { background: var(--bg-surface-hover); color: var(--text-main); }
+
+    /* ==========================================================================
+       10. TIMELINE & CALENDAR MODULE
+       ========================================================================== */
+    .calendar-container { padding: 24px; }
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .cal-month-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cal-nav-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+    .cal-nav-btn:hover { background: var(--bg-surface-hover); color: var(--gold-primary); }
+
+    .cal-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .cal-weekday { font-size: 12px; font-weight: 700; color: var(--text-faint); padding: 8px 0; }
+    .cal-cell {
+      min-height: 70px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    .cal-cell:hover { border-color: var(--gold-primary); background: var(--bg-surface-hover); }
+    .cal-cell.today { border-color: var(--gold-primary); box-shadow: inset 0 0 0 1px var(--gold-primary); }
+    .cal-cell.other-month { opacity: 0.35; }
+    .cal-cell.selected { background: rgba(229, 184, 105, 0.12); border-color: var(--gold-primary); }
+    .cal-date-num { font-weight: 800; font-size: 13px; text-align: right; }
+    .cal-cell.today .cal-date-num { color: var(--gold-primary); }
+    .cal-dots { display: flex; flex-wrap: wrap; gap: 3px; justify-content: flex-end; }
+    .cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-primary); }
+
+    .day-timeline {
+      margin-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+    }
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .timeline-hours { display: flex; flex-direction: column; gap: 8px; }
+    .timeline-slot {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 14px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .slot-time {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      width: 75px;
+      direction: ltr;
+      text-align: left;
+    }
+    .slot-content { flex: 1; min-width: 0; }
+    .slot-empty { color: var(--text-faint); font-size: 12px; font-style: italic; }
+    .slot-busy { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+    /* ==========================================================================
+       11. LIVE STUDIO "ON AIR" SCREEN & VU METERS
+       ========================================================================== */
+    .onair-panel {
+      background: radial-gradient(circle at center, #1b2333 0%, #0d121a 70%, #080b0f 100%);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 36px clamp(20px, 4vw, 48px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(229, 184, 105, 0.05);
+    }
+    .onair-neon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 26px;
+      border-radius: var(--radius-pill);
+      background: rgba(239, 68, 68, 0.15);
+      border: 2px solid #ef4444;
+      color: #ff5555;
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.4), inset 0 0 15px rgba(239, 68, 68, 0.2);
+      animation: onAirPulse 1.8s infinite;
+      margin-bottom: 22px;
+    }
+    @keyframes onAirPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), inset 0 0 10px rgba(239, 68, 68, 0.2); }
+      50% { box-shadow: 0 0 45px rgba(239, 68, 68, 0.75), inset 0 0 22px rgba(239, 68, 68, 0.45); }
+    }
+    .timer-display {
+      font-family: 'Cairo', monospace, sans-serif;
+      font-size: clamp(52px, 10vw, 92px);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 2px;
+      direction: ltr;
+      text-shadow: 0 0 35px rgba(255, 255, 255, 0.45);
+      margin-bottom: 12px;
+    }
+    .session-live-info {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      max-width: 640px;
+      margin: 0 auto 22px;
+      backdrop-filter: blur(10px);
+    }
+    .live-work-title { font-size: 24px; font-weight: 800; color: var(--gold-primary); margin-bottom: 6px; }
+    .live-artist-name { font-size: 16px; color: #ffffff; margin-bottom: 12px; }
+    .live-details-chips { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .live-chip { background: rgba(255, 255, 255, 0.08); padding: 4px 12px; border-radius: var(--radius-pill); font-size: 12px; color: #e5eaf3; }
+    
+    /* Studio Visualizer & VU Meter Container */
+    .studio-visualizer-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto 24px;
+    }
+
+    .vu-meter {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 3px;
+      height: 90px;
+      width: 14px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 3px;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+    .vu-led {
+      flex: 1;
+      border-radius: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      transition: background 0.05s ease;
+    }
+    .vu-led.green.on { background: #10b981; box-shadow: 0 0 6px #10b981; }
+    .vu-led.yellow.on { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+    .vu-led.red.on { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+
+    .visualizer-canvas { width: 100%; max-width: 640px; height: 90px; display: block; border-radius: 8px; background: rgba(0, 0, 0, 0.3); }
+
+    .onair-controls { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .timer-ctrl-btn { padding: 12px 22px; border-radius: var(--radius-pill); font-weight: 800; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+    .timer-ctrl-btn.play { background: var(--emerald-accent); color: #ffffff; box-shadow: 0 4px 20px var(--emerald-glow); }
+    .timer-ctrl-btn.reset { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
+    .timer-ctrl-btn.take { background: var(--purple-accent); color: #ffffff; }
+
+    /* Sound Engineer Take Notes */
+    .take-notes-box {
+      max-width: 640px;
+      margin: 18px auto 0;
+      text-align: right;
+    }
+    .take-notes-box input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 9px 14px;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    /* Live Voice Recording Active State */
+    .timer-ctrl-btn.recording-active {
+      background: var(--crimson-accent) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 25px var(--crimson-glow) !important;
+      animation: onAirPulse 1.2s infinite;
+    }
+
+    /* Recorded Takes Archive Cards */
+    .take-archive-card {
+      background: rgba(18, 23, 33, 0.95);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: right;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .take-archive-card:hover {
+      border-color: rgba(229, 184, 105, 0.45);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    .take-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .take-badge {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+      padding: 3px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .take-audio-player {
+      width: 100%;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      filter: invert(0.9) hue-rotate(180deg);
+    }
+    .take-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-take-action {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .btn-take-action:hover {
+      background: rgba(229, 184, 105, 0.2);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    /* ==========================================================================
+       12. ANALYTICS & CHARTS
+       ========================================================================== */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      padding: 24px;
+    }
+    .chart-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .chart-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .svg-chart-wrap { width: 100%; height: 220px; position: relative; }
+
+    /* ==========================================================================
+       13. MODALS (INVOICE & CALCULATOR & STATUS PICKER)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(8, 11, 16, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal-window {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-overlay.active .modal-window { transform: scale(1); }
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--bg-surface);
+      z-index: 2;
+    }
+    .modal-close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: var(--text-muted);
+      background: var(--bg-surface-elevated);
+    }
+    .modal-close-btn:hover { background: var(--bg-surface-hover); color: var(--text-main); }
+
+    /* Printable Invoice Style */
+    .invoice-printable {
+      padding: 34px;
+      background: #ffffff;
+      color: #121815;
+      font-family: 'Cairo', Tahoma, sans-serif;
+      border-radius: var(--radius-md);
+      margin: 20px;
+      border: 1px solid #e2ded5;
+      position: relative;
+    }
+    .invoice-header-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #b78335;
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .inv-brand h2 { font-size: 26px; font-weight: 900; color: #15382b; margin: 0; }
+    .inv-brand p { font-size: 12px; color: #627068; margin: 2px 0 0; }
+    .inv-meta { text-align: left; font-size: 12px; }
+    .inv-num { font-size: 17px; font-weight: 900; color: #b78335; }
+    
+    .invoice-table { width: 100%; border-collapse: collapse; margin: 18px 0; }
+    .invoice-table th, .invoice-table td { border: 1px solid #e5e2da; padding: 10px 14px; text-align: right; font-size: 13px; }
+    .invoice-table th { background: #f8f6f0; font-weight: 700; color: #38423d; }
+    
+    .invoice-totals-box {
+      margin-top: 16px;
+      background: #faf8f4;
+      border: 1px solid #ebe6dc;
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .inv-row { display: flex; justify-content: space-between; }
+    .inv-row.grand { border-top: 1px dashed #d5cebf; padding-top: 8px; font-size: 16px; font-weight: 800; color: #15382b; }
+    .invoice-footer-terms { margin-top: 24px; border-top: 1px solid #eae5db; padding-top: 14px; font-size: 11px; color: #7a8680; line-height: 1.7; }
+    
+    .invoice-signatures {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+      padding-top: 10px;
+    }
+    .sig-box { text-align: center; width: 150px; border-top: 1px solid #121815; padding-top: 6px; font-size: 12px; font-weight: 700; }
+    
+    /* Official Circular Stamp & QR Code */
+    .official-stamp-seal {
+      width: 90px;
+      height: 90px;
+      border: 2px dashed #b78335;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #b78335;
+      font-size: 10px;
+      font-weight: 800;
+      transform: rotate(-10deg);
+      background: rgba(183, 131, 53, 0.04);
+    }
+    .qr-box-img {
+      width: 70px;
+      height: 70px;
+      background: #f1ede4;
+      border: 1px solid #d5cebf;
+      padding: 4px;
+      display: grid;
+      place-items: center;
+    }
+
+    @media print {
+      body * { visibility: hidden !important; }
+      .modal-overlay, .modal-window, .invoice-printable, .invoice-printable * { visibility: visible !important; }
+      .modal-overlay { position: absolute; inset: 0; background: transparent; padding: 0; }
+      .modal-window { box-shadow: none; border: none; max-width: 100%; }
+      .modal-header, .modal-actions-print { display: none !important; }
+      .invoice-printable { margin: 0; border: none; width: 100%; }
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast-msg {
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-highlight);
+      box-shadow: var(--shadow-lg);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+    }
+    .toast-msg.success { border-color: var(--emerald-accent); color: #34d399; }
+    .toast-msg.error { border-color: var(--crimson-accent); color: #f87171; }
+    .toast-msg.info { border-color: var(--gold-primary); color: var(--gold-primary); }
+
+    @keyframes toastIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    @media (max-width: 1200px) {
+      .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .layout-grid { grid-template-columns: 1fr; }
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .topbar { padding: 10px 14px; }
+      .topbar-btn span.btn-label { display: none; }
+      .clock-display { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      .col-span-2 { grid-column: auto; }
+      .cal-cell { min-height: 50px; padding: 4px; }
+      .cal-dots { display: none; }
+    }
+    @media (max-width: 480px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       LOGIN PORTAL (AUTHENTICATION MODAL)
+       ======================================================================== -->
+  <section class="splash" id="splash" aria-label="بوابة الدخول لأثر">
+    <div class="login-card">
+      <div class="login-brand-icon">أ</div>
+      <h1 class="login-title">أَثَــــر <span>ATHAR</span></h1>
+      <p class="login-sub">تسجيل الدخول إلى منظومة إدارة استوديو الإنتاج الفني</p>
+
+      <div class="login-error-alert" id="loginErrorAlert"></div>
+
+      <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+        <div class="login-input-group">
+          <label for="loginUsername"><span>👤 اسم المستخدم</span></label>
+          <div class="login-input-wrapper">
+            <input type="text" id="loginUsername" placeholder="مثال: admin" value="admin" required autofocus autocomplete="username">
+            <span class="login-input-icon">🔐</span>
+          </div>
+        </div>
+
+        <div class="login-input-group">
+          <label for="loginPassword"><span>🔑 كلمة المرور</span></label>
+          <div class="login-input-wrapper">
+            <input type="password" id="loginPassword" placeholder="كلمة المرور" required autocomplete="current-password">
+            <span class="login-input-icon" id="togglePasswordBtn" onclick="togglePasswordVisibility()" title="إظهار / إخفاء كلمة المرور">👁️</span>
+          </div>
+        </div>
+
+        <div class="login-remember-row">
+          <label>
+            <input type="checkbox" id="loginRememberMe" checked>
+            <span>تذكر تسجيل دخولي على هذا الجهاز</span>
+          </label>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginSubmitBtn">
+          <span>دخول إلى إدارة الاستوديو</span>
+          <span style="font-size: 18px;">➔</span>
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       TOPBAR & BRANDING
+       ======================================================================== -->
+  <header class="topbar">
+    <div class="brand-section">
+      <div class="brand-mark">أ</div>
+      <div class="brand-text">
+        <h1>
+          أَثَر <span style="font-weight: 300; font-size: 14px; color: var(--gold-primary);">| ATHAR</span>
+          <span class="brand-tag">استوديو نشط</span>
+        </h1>
+        <p>إدارة حجوزات الإنتاج الفني والتسجيل الصوتي</p>
+      </div>
+
+      <div class="studio-eq" title="مؤشر إشارة الاستوديو">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <div class="clock-display" id="studioClock">00:00:00</div>
+
+      <button class="topbar-btn excel-action" id="btnSaveToExcelTop" title="حفظ وتنزيل كل الحجوزات في ملف إكسل .xlsx" onclick="exportToExcelNative()">
+        <span>📊</span>
+        <span class="btn-label">حفظ الإكسل</span>
+      </button>
+
+      <button class="topbar-btn on-air-pulse" id="btnLiveOnAir" title="شاشة التسجيل المباشر داخل غرفة الصوت">
+        <span class="live-dot"></span>
+        <span class="btn-label">🔴 ON AIR</span>
+      </button>
+
+      <button class="topbar-btn" id="btnOpenCalculator" title="حاسبة تكلفة الجلسات والخدمات">
+        <span>🖩</span>
+        <span class="btn-label">حاسبة الأسعار</span>
+      </button>
+
+      <button class="topbar-btn" id="btnToggleSound" title="تشغيل / كتم المؤثرات الصوتية">
+        <span id="soundIcon">🔊</span>
+      </button>
+
+      <button class="topbar-btn" id="btnToggleTheme" title="تبديل الوضع الليلي / النهاري">
+        <span id="themeIcon">🌓</span>
+      </button>
+
+      <button class="topbar-btn primary" id="btnTopNewBooking">
+        <span>＋</span>
+        <span class="btn-label">حجز جديد</span>
+      </button>
+
+      <button class="topbar-btn logout" id="btnLogout" title="تسجيل الخروج" onclick="handleLogout()">
+        <span>🚪</span>
+        <span class="btn-label">خروج</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN APP CONTAINER
+       ======================================================================== -->
+  <main class="app-container">
+
+    <!-- Server & Excel Status Bar -->
+    <div class="server-status-strip" id="serverStatusStrip">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span id="syncDot" style="width: 8px; height: 8px; border-radius: 50%; background: var(--emerald-accent);"></span>
+        <span id="syncStatusText">ملف الإكسل مرتبط تلقائياً: <b>حجوزات_استوديو_أثر.xlsx</b> في مجلد المشروع</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="chip-btn" onclick="exportToExcelNative()" style="background: rgba(16,185,129,0.15); color: #34d399; border-color: var(--emerald-accent);">
+          📥 تنزيل نسخة إكسل جديدة
+        </button>
+        <button class="chip-btn" id="btnOpenExcelOnPC" onclick="openExcelOnDesktop()" style="display: none;">
+          📂 فتح الملف على الجهاز
+        </button>
+      </div>
+    </div>
+
+    <!-- Top Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="bookings">
+        <span>📋</span>
+        <span>سجل الحجوزات</span>
+        <span class="tab-badge" id="tabCountBadge">0</span>
+      </button>
+      <button class="tab-btn" data-tab="calendar">
+        <span>📅</span>
+        <span>التقويم ومخطط اليوم</span>
+      </button>
+      <button class="tab-btn" data-tab="analytics">
+        <span>📊</span>
+        <span>التقارير والإحصائيات</span>
+      </button>
+      <button class="tab-btn" data-tab="onair">
+        <span>🎙️</span>
+        <span>شاشة البث المباشر (ON AIR)</span>
+      </button>
+      <button class="tab-btn" data-tab="tools">
+        <span>⚙️</span>
+        <span>الإكسل والنسخ الاحتياطي</span>
+      </button>
+    </nav>
+
+    <!-- ======================================================================
+         SECTION 1: KPI CARDS (LIVE EXECUTIVE STATS)
+         ====================================================================== -->
+    <section class="kpi-grid">
+      <div class="kpi-card gold">
+        <div class="kpi-top">
+          <span>حجوزات اليوم</span>
+          <div class="kpi-icon">📅</div>
+        </div>
+        <div class="kpi-val" id="kpiTodayCount">0</div>
+        <div class="kpi-footer">
+          <span id="kpiTodayMeta">جلسات مجدولة لهذا اليوم</span>
+        </div>
+      </div>
+
+      <div class="kpi-card blue">
+        <div class="kpi-top">
+          <span>الجلسات القادمة</span>
+          <div class="kpi-icon">⏳</div>
+        </div>
+        <div class="kpi-val" id="kpiUpcomingCount">0</div>
+        <div class="kpi-footer">
+          <span>مؤكدة أو قيد التأكيد</span>
+        </div>
+      </div>
+
+      <div class="kpi-card emerald">
+        <div class="kpi-top">
+          <span>إجمالي الإيرادات</span>
+          <div class="kpi-icon">💰</div>
+        </div>
+        <div class="kpi-val" id="kpiRevenueTotal">0 ج.م</div>
+        <div class="kpi-footer">
+          <span>للحجوزات الفعالة غير الملغاة</span>
+        </div>
+      </div>
+
+      <div class="kpi-card purple">
+        <div class="kpi-top">
+          <span>المبالغ المحصّلة</span>
+          <div class="kpi-icon">💳</div>
+        </div>
+        <div class="kpi-val" id="kpiCollectedTotal">0 ج.م</div>
+        <div class="progress-bar-wrap" title="نسبة التحصيل">
+          <div class="progress-bar-fill" id="kpiCollectRateBar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="kpi-card crimson">
+        <div class="kpi-top">
+          <span>المتبقي للتحصيل</span>
+          <div class="kpi-icon">⚠️</div>
+        </div>
+        <div class="kpi-val" id="kpiRemainingTotal">0 ج.م</div>
+        <div class="kpi-footer">
+          <span>تُدفع عند انتهاء الجلسات</span>
+        </div>
+      </div>
+
+      <div class="kpi-card amber">
+        <div class="kpi-top">
+          <span>ساعات الاستوديو</span>
+          <div class="kpi-icon">🎙️</div>
+        </div>
+        <div class="kpi-val" id="kpiTotalHours">0 س</div>
+        <div class="kpi-footer">
+          <span>إجمالي زمن التسجيل المحجوز</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 1: BOOKINGS LIST & NEW BOOKING FORM
+         ====================================================================== -->
+    <div class="tab-content" id="tab-bookings">
+      <div class="layout-grid">
+        
+        <!-- ================================================================
+             1. FORM PANEL (الآن على اليمين بالكامل كما طلب المستخدم)
+             ================================================================ -->
+        <aside class="panel form-panel" id="bookingFormSection">
+          <div class="form-panel-head">
+            <h3 id="formTitle">
+              <span>🎙️</span>
+              <span id="formTitleText">حجز جلسة استوديو جديدة</span>
+            </h3>
+            <p>سجّل تفاصيل المنشد، العمل الفني، الموعد والحسابات.</p>
+          </div>
+
+          
+          <div class="form-presets-strip">
+            <span style="font-size: 11px; font-weight: 800; color: var(--gold-primary);">⚡ تعبئة نموذجية سريعة بنقرة واحدة:</span>
+            <div class="preset-chips-wrap">
+              <button type="button" class="preset-chip" onclick="fillPreset('nashid')">🎵 إنشاد ديني</button>
+              <button type="button" class="preset-chip" onclick="fillPreset('quran')">📖 تلاوة قرآنية</button>
+              <button type="button" class="preset-chip" onclick="fillPreset('podcast')">🎙️ بودكاست</button>
+              <button type="button" class="preset-chip" onclick="fillPreset('choral')">👥 كورال وفوكال</button>
+            </div>
+          </div>
+
+          <form id="bookingForm">
+            <input type="hidden" id="bookingId">
+
+            <div class="form-grid">
+              <div class="form-group col-span-2">
+                <label for="clientName">اسم المنشد / العميل *</label>
+                <input type="text" class="form-control" id="clientName" required placeholder="مثال: المنشد محمود القزاز">
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="clientPhone">
+                  <span>رقم الهاتف (واتساب) *</span>
+                  <span style="font-size: 10px; color: var(--text-faint);">لإرسال تفاصيل الحجز</span>
+                </label>
+                <input type="tel" class="form-control" id="clientPhone" required placeholder="01xxxxxxxxx">
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="workTitle">اسم العمل / الأنشودة</label>
+                <input type="text" class="form-control" id="workTitle" placeholder="مثال: قمرٌ سيدنا النبي / قصيدة البردة">
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="serviceType">نوع الخدمة الفنية *</label>
+                <select class="form-control" id="serviceType" required>
+                  <option value="تسجيل إنشاد ديني">تسجيل إنشاد ديني</option>
+                  <option value="تسجيل صوتي">تسجيل صوتي (فوكال)</option>
+                  <option value="مكساج وماستر">مكساج وماسترينغ</option>
+                  <option value="فوكال وكورال">فوكال وكورال جماعي</option>
+                  <option value="تلاوة قرآنية">تلاوة قرآنية خاشعة</option>
+                  <option value="بودكاست">تسجيل بودكاست صوتي</option>
+                  <option value="تسجيل إعلان">تسجيل تعليق صوتي / إعلان</option>
+                  <option value="إنتاج فني كامل">إنتاج فني كامل (لحن وتوزيع وتسجيل)</option>
+                  <option value="أخرى">خدمة أخرى</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="musicMaqam">المقام الموسيقي</label>
+                <select class="form-control" id="musicMaqam">
+                  <option value="">(غير محدد)</option>
+                  <option value="نهاوند">نهاوند</option>
+                  <option value="بياتي">بياتي</option>
+                  <option value="رست">رست</option>
+                  <option value="حجاز">حجاز</option>
+                  <option value="صبا">صبا</option>
+                  <option value="سيكاه">سيكاه</option>
+                  <option value="عجم">عجم</option>
+                  <option value="كورد">كورد</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="soundEngineer">مهندس الصوت</label>
+                <select class="form-control" id="soundEngineer">
+                  <option value="م/ أحمد فاروق">م/ أحمد فاروق</option>
+                  <option value="م/ عبد الرحمن">م/ عبد الرحمن</option>
+                  <option value="م/ محمود الشريف">م/ محمود الشريف</option>
+                  <option value="المهندس المناوب">المهندس المناوب</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="bookingDate">تاريخ الجلسة *</label>
+                <input type="date" class="form-control" id="bookingDate" required>
+              </div>
+
+              <div class="form-group">
+                <label for="bookingTime">وقت البداية *</label>
+                <input type="time" class="form-control" id="bookingTime" required value="17:00">
+              </div>
+
+              <div class="conflict-alert col-span-2" id="conflictAlertBox">
+                ⚠️ <strong>تنبيه تضارب مواعيد:</strong>
+                <span id="conflictAlertMsg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="sessionDuration">مدة الجلسة *</label>
+                <select class="form-control" id="sessionDuration" required>
+                  <option value="1">ساعة واحدة</option>
+                  <option value="2" selected>ساعتان (2 ساعة)</option>
+                  <option value="3">3 ساعات</option>
+                  <option value="4">4 ساعات (نصف يوم)</option>
+                  <option value="6">6 ساعات</option>
+                  <option value="8">يوم كامل (8 ساعات)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="bookingStatus">حالة الحجز</label>
+                <select class="form-control" id="bookingStatus">
+                  <option value="pending">⏳ قيد التأكيد</option>
+                  <option value="confirmed" selected>✅ مؤكد</option>
+                  <option value="recording">🔴 جاري التسجيل الآن</option>
+                  <option value="done">🎧 تم التسجيل</option>
+                  <option value="completed">✨ مكتمل ومُسلّم</option>
+                  <option value="cancelled">❌ ملغي</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="totalPrice">السعر الإجمالي (ج.م) *</label>
+                <input type="number" class="form-control" id="totalPrice" min="0" step="10" required placeholder="0">
+              </div>
+
+              <div class="form-group">
+                <label for="depositPaid">العربون المدفوع (ج.م)</label>
+                <input type="number" class="form-control" id="depositPaid" min="0" step="10" value="0">
+              </div>
+
+              <div class="money-calc-box col-span-2">
+                <div class="money-calc-item">
+                  <span>الإجمالي</span>
+                  <strong id="previewTotal">0 ج.م</strong>
+                </div>
+                <div style="color: var(--text-faint);">-</div>
+                <div class="money-calc-item">
+                  <span>العربون</span>
+                  <strong id="previewDeposit" style="color: var(--emerald-accent);">0 ج.م</strong>
+                </div>
+                <div style="color: var(--text-faint);">=</div>
+                <div class="money-calc-item rem">
+                  <span>المتبقي المطلوب</span>
+                  <strong id="previewRemaining">0 ج.م</strong>
+                </div>
+              </div>
+
+              <div class="form-group col-span-2">
+                <label for="bookingNotes">ملاحظات فنية وتوجيهات</label>
+                <textarea class="form-control" id="bookingNotes" rows="2" placeholder="نوع المايك، خامة الصوت، عدد المنشدين، توزيع التراكات..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions-row">
+              <button type="submit" class="btn-submit" id="btnSaveBooking">
+                <span>💾</span>
+                <span id="saveBtnText">حفظ في السجل والإكسل</span>
+              </button>
+              <button type="button" class="btn-cancel" id="btnResetForm">
+                <span>تفريغ</span>
+              </button>
+            </div>
+          
+        </form>
+        </aside>
+
+        <!-- ================================================================
+             2. BOOKINGS TABLE & FILTERS (على اليسار بجوار النموذج)
+             ================================================================ -->
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>سجل الجلسات والحجوزات</span>
+              <span class="tab-badge" id="listFilteredCount">0 جلسة</span>
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <button class="topbar-btn" onclick="exportToExcelNative()" title="تنزيل ملف إكسل الآن" style="padding: 6px 12px; font-size: 12px; color: var(--emerald-accent);">
+                <span>📊 إكسل</span>
+              </button>
+              <div class="view-switch">
+                <button class="view-btn active" id="viewModeTable" title="عرض الجدول">جدول</button>
+                <button class="view-btn" id="viewModeCards" title="عرض البطاقات">بطاقات</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filters-bar">
+            <div class="filters-main-row">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="ابحث باسم المنشد/العميل، الهاتف، أو اسم العمل...">
+              </div>
+
+              <select class="filter-select" id="filterStatus">
+                <option value="all">كل الحالات</option>
+                <option value="pending">⏳ قيد التأكيد</option>
+                <option value="confirmed">✅ مؤكد</option>
+                <option value="recording">🔴 جاري التسجيل</option>
+                <option value="done">🎧 تم التسجيل</option>
+                <option value="completed">✨ مكتمل ومُسلّم</option>
+                <option value="cancelled">❌ ملغي</option>
+              </select>
+
+              <select class="filter-select" id="filterService">
+                <option value="all">كل الخدمات</option>
+                <option value="تسجيل إنشاد ديني">تسجيل إنشاد ديني</option>
+                <option value="تسجيل صوتي">تسجيل صوتي</option>
+                <option value="مكساج وماستر">مكساج وماستر</option>
+                <option value="فوكال وكورال">فوكال وكورال</option>
+                <option value="تلاوة قرآنية">تلاوة قرآنية</option>
+                <option value="بودكاست">بودكاست</option>
+                <option value="تسجيل إعلان">تسجيل إعلان</option>
+                <option value="إنتاج فني كامل">إنتاج فني كامل</option>
+              </select>
+
+              <input type="date" class="filter-select" id="filterDate" title="فلترة بتاريخ محدد">
+            </div>
+
+            <div class="quick-chips">
+              <button class="chip-btn active" data-chip="all">الكل</button>
+              <button class="chip-btn" data-chip="today">🔥 جلسات اليوم <span id="chipCountToday" style="opacity: 0.75;"></span></button>
+              <button class="chip-btn" data-chip="upcoming">⏳ القادمة</button>
+              <button class="chip-btn" data-chip="due">⚠️ متبقي عليهم مبالغ <span id="chipCountDue" style="opacity: 0.75;"></span></button>
+              <button class="chip-btn" data-chip="nashid">🎵 إنشاد وتواشيح</button>
+              <button class="chip-btn" data-chip="recording">🔴 تسجيل مباشر الآن</button>
+            </div>
+          </div>
+
+          <div class="table-container" id="tableContainer">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>العميل / العمل الفني</th>
+                  <th>الموعد والمدة</th>
+                  <th>الخدمة / المقام</th>
+                  <th>الماليات</th>
+                  <th>الحالة (انقر للتغيير)</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody"></tbody>
+            </table>
+
+            <div id="tableEmptyState" style="text-align: center; padding: 48px 20px; color: var(--text-muted); display: none;">
+              <div style="font-size: 38px; margin-bottom: 10px;">🎙️</div>
+              <h4 style="color: var(--text-main); margin-bottom: 6px;">لا توجد حجوزات مطابقة للبحث</h4>
+              <p style="font-size: 13px;">جرّب تعديل الفلاتر أو اضغط "حجز جديد" لإضافة جلسة للاستوديو.</p>
+            </div>
+          </div>
+
+          <div class="cards-grid" id="cardsGridContainer" style="display: none;"></div>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-calendar" style="display: none;">
+      <!-- Screen Navigation Banner -->
+      <div class="screen-subnav-bar">
+        <div class="subnav-title">
+          <span style="font-size: 18px;">📅</span>
+          <span>شاشة التقويم الشهري ومخطط مواعيد وجلسات الاستوديو</span>
+        </div>
+        <div class="subnav-actions">
+          <button class="topbar-btn primary" onclick="switchTab('bookings')">
+            <span>📋</span>
+            <span>العودة لسجل الحجوزات (الرئيسية)</span>
+          </button>
+          <button class="topbar-btn" onclick="quickBookAt(selectedCalDayStr, '18:00')">
+            <span>＋</span>
+            <span>حجز في هذا اليوم</span>
+          </button>
+          <button class="topbar-btn on-air-pulse" onclick="switchTab('onair')">
+            <span class="live-dot"></span>
+            <span>🔴 شاشة البث (ON AIR)</span>
+          </button>
+          <button class="topbar-btn" onclick="switchTab('analytics')">
+            <span>📊</span>
+            <span>الإحصائيات</span>
+          </button>
+        </div>
+      </div>
+
+      <section class="panel calendar-container">
+        <div class="calendar-header">
+          <div class="cal-month-title">
+            <span>📅</span>
+            <span id="calMonthTitleText">أكتوبر 2026</span>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="cal-nav-btn" id="calPrevMonth" title="الشهر السابق">❯</button>
+            <button class="cal-nav-btn" id="calTodayBtn" style="width: auto; padding: 0 12px; font-size: 13px;">اليوم</button>
+            <button class="cal-nav-btn" id="calNextMonth" title="الشهر القادم">❮</button>
+          </div>
+        </div>
+
+        <div class="cal-days-grid" id="calendarGrid"></div>
+
+        <div class="day-timeline">
+          <div class="timeline-title">
+            <span id="timelineDayLabel">جدول مواعيد اليوم</span>
+            <button class="topbar-btn" id="btnQuickAddTimeline" style="padding: 5px 12px; font-size: 12px;">+ حجز في هذا اليوم</button>
+          </div>
+
+          <div class="timeline-hours" id="timelineHoursList"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         TAB 3: ANALYTICS & REPORTS
+         ====================================================================== -->
+    <div class="tab-content" id="tab-analytics" style="display: none;">
+      <!-- Screen Navigation Banner -->
+      <div class="screen-subnav-bar">
+        <div class="subnav-title">
+          <span style="font-size: 18px;">📊</span>
+          <span>شاشة التقارير التحليلية والمالية الشاملة للاستوديو</span>
+        </div>
+        <div class="subnav-actions">
+          <button class="topbar-btn primary" onclick="switchTab('bookings')">
+            <span>📋</span>
+            <span>العودة لسجل الحجوزات (الرئيسية)</span>
+          </button>
+          <button class="topbar-btn" onclick="switchTab('calendar')">
+            <span>📅</span>
+            <span>الانتقال لتقويم المواعيد</span>
+          </button>
+          <button class="topbar-btn excel-action" onclick="exportToExcelNative()">
+            <span>📥</span>
+            <span>تنزيل تقرير إكسل (.xlsx)</span>
+          </button>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>📊</span>
+            <span>التقارير التحليلية والمالية للاستوديو</span>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>توزيع الإيرادات حسب نوع الخدمة</span>
+              <span style="font-size: 12px; color: var(--gold-primary);">ج.م</span>
+            </div>
+            <div class="svg-chart-wrap" id="chartServicesWrap"></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>توزيع الجلسات على مدار الأسبوع</span>
+              <span style="font-size: 12px; color: var(--emerald-accent);">عدد الجلسات</span>
+            </div>
+            <div class="svg-chart-wrap" id="chartDaysWrap"></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>المقامات الصوتية الأكثر تسجيلاً بالاستوديو</span>
+              <span style="font-size: 12px; color: var(--purple-accent);">إنشاد وتلاوة</span>
+            </div>
+            <div id="maqamsStatsList" style="display: flex; flex-direction: column; gap: 10px; padding-top: 8px;"></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>حالة التحصيل والمستحقات</span>
+              <span style="font-size: 12px; color: var(--emerald-accent);">نسب مئوية</span>
+            </div>
+            <div id="financialHealthWrap" style="display: flex; align-items: center; justify-content: space-around; height: 180px;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         TAB 4: LIVE STUDIO "ON AIR" SCREEN
+         ====================================================================== -->
+    <div class="tab-content" id="tab-onair" style="display: none;">
+      <!-- Screen Navigation Banner -->
+      <div class="screen-subnav-bar" style="background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.35);">
+        <div class="subnav-title">
+          <span class="live-dot" style="width: 10px; height: 10px;"></span>
+          <span style="color: #f87171; font-weight: 800;">شاشة التسجيل المباشر داخل غرفة الصوت (ON AIR STUDIO)</span>
+        </div>
+        <div class="subnav-actions">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <label for="onairSessionSelect" style="font-size: 12px; color: var(--text-muted); font-weight: 700;">تحميل جلسة:</label>
+            <select id="onairSessionSelect" class="filter-select" style="min-width: 240px; background: var(--bg-surface);" onchange="loadSessionToOnAir(this.value)">
+              <option value="">-- اختر من الحجوزات الحالية --</option>
+            </select>
+          </div>
+          <button class="topbar-btn primary" onclick="switchTab('bookings')">
+            <span>📋</span>
+            <span>العودة للوحة التحكم الرئيسية</span>
+          </button>
+        </div>
+      </div>
+
+      <section class="onair-panel" id="onairContainer">
+        <div class="onair-neon-badge" id="onairBadge">
+          <span class="live-dot" style="width: 12px; height: 12px;"></span>
+          <span>ON AIR — جاري التسجيل الصوتي</span>
+        </div>
+
+        <div class="timer-display" id="studioTimerDisplay">00:00:00</div>
+
+        <div class="session-live-info">
+          <div class="live-work-title" id="onairWorkTitle">أنشودة: قمرٌ سيدنا النبي</div>
+          <div class="live-artist-name" id="onairArtistName">المنشد: الشيخ محمود القزاز</div>
+          <div class="live-details-chips">
+            <span class="live-chip" id="onairMaqam">المقام: نهاوند</span>
+            <span class="live-chip" id="onairEngineer">المهندس: م/ أحمد فاروق</span>
+            <span class="live-chip" id="onairBooth">غرفة: Vocal Booth A</span>
+            <span class="live-chip" id="onairTakeCounter">المحاولة (Take #1)</span>
+          </div>
+        </div>
+
+        <!-- Studio Waveform Canvas flanked by Stereo VU Meters -->
+        <div class="studio-visualizer-container">
+          <div class="vu-meter" id="vuMeterLeft" title="مستوى الصوت الأيسر Left">
+            <div class="vu-led green"></div><div class="vu-led green"></div><div class="vu-led green"></div>
+            <div class="vu-led green"></div><div class="vu-led green"></div><div class="vu-led yellow"></div>
+            <div class="vu-led yellow"></div><div class="vu-led red"></div>
+          </div>
+
+          <canvas class="visualizer-canvas" id="waveformCanvas" width="640" height="90"></canvas>
+
+          <div class="vu-meter" id="vuMeterRight" title="مستوى الصوت الأيمن Right">
+            <div class="vu-led green"></div><div class="vu-led green"></div><div class="vu-led green"></div>
+            <div class="vu-led green"></div><div class="vu-led green"></div><div class="vu-led yellow"></div>
+            <div class="vu-led yellow"></div><div class="vu-led red"></div>
+          </div>
+        </div>
+
+        <div class="onair-controls">
+          <button class="timer-ctrl-btn play" id="btnTimerToggle">
+            <span id="btnTimerIcon">▶</span>
+            <span id="btnTimerText">بدء التسجيل</span>
+          </button>
+          <button class="timer-ctrl-btn reset" id="btnTimerReset">
+            <span>↺</span>
+            <span>تصفير العداد</span>
+          </button>
+          <button class="timer-ctrl-btn take" id="btnNextTake">
+            <span>＋</span>
+            <span>تيك جديد (Next Take)</span>
+          </button>
+          <button class="timer-ctrl-btn reset" id="btnFullscreenToggle" title="شاشة كاملة للشاشات التلفزيونية داخل الاستوديو">
+            <span>⛶</span>
+            <span>وضع ملء الشاشة</span>
+          </button>
+        </div>
+
+        <div class="take-notes-box">
+          <input type="text" id="liveTakeNoteInput" placeholder="📝 ملاحظة سريعة لمهندس الصوت أثناء التيك (مثال: إعادة الآهات في الدقيقة 01:45)...">
+        </div>
+
+        <!-- Recorded Takes Archive Section -->
+        <div class="recorded-takes-section" id="recordedTakesSection" style="margin: 28px auto 0; max-width: 680px; text-align: right; display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+            <div style="font-weight: 800; font-size: 15px; color: var(--gold-primary); display: flex; align-items: center; gap: 8px;">
+              <span>🎙️</span>
+              <span>سجل التسجيلات الصوتية والتيكات المكتملة</span>
+            </div>
+            <span id="takesCountBadge" style="font-size: 11px; background: rgba(229, 184, 105, 0.18); color: var(--gold-light); padding: 3px 12px; border-radius: var(--radius-pill); font-weight: 700;">0 تيك</span>
+          </div>
+          <div id="recordedTakesList" style="display: flex; flex-direction: column; gap: 12px;"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         TAB 5: TOOLS, DEMO DATA & BACKUP
+         ====================================================================== -->
+    <div class="tab-content" id="tab-tools" style="display: none;">
+      <!-- Screen Navigation Banner -->
+      <div class="screen-subnav-bar">
+        <div class="subnav-title">
+          <span style="font-size: 18px;">⚙️</span>
+          <span>شاشة أدوات الإكسل والنسخ الاحتياطي وحفظ البيانات</span>
+        </div>
+        <div class="subnav-actions">
+          <button class="topbar-btn primary" onclick="switchTab('bookings')">
+            <span>📋</span>
+            <span>العودة لسجل الحجوزات (الرئيسية)</span>
+          </button>
+        </div>
+      </div>
+
+      <section class="panel" style="padding: 24px;">
+        <div class="panel-header" style="margin: -24px -24px 24px -24px;">
+          <div class="panel-title">
+            <span>⚙️</span>
+            <span>ملف الإكسل وحفظ البيانات والنسخ الاحتياطي</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+          
+          <div class="booking-card" style="border: 1px solid var(--emerald-accent);">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <h4 style="font-size: 16px; color: var(--emerald-accent);">📊 ملف إكسل رسمي (.xlsx)</h4>
+              <span class="brand-tag">متزامن دائماً</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+              يتم حفظ وتحديث ملف <b>حجوزات_استوديو_أثر.xlsx</b> بجوار المشروع تلقائياً. يمكنك أيضاً تنزيل أحدث نسخة إكسل منسقة باللغة العربية بضغطة زر واحدة.
+            </p>
+            <div style="display: flex; gap: 8px; margin-top: auto;">
+              <button class="topbar-btn excel-action" onclick="exportToExcelNative()" style="flex: 1; justify-content: center;">
+                <span>📥 تنزيل ملف الإكسل (.xlsx)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="booking-card">
+            <h4 style="font-size: 16px; color: var(--gold-primary);">🎯 البيانات التجريبية للاستوديو</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+              قم بتعبئة النظام فوراً بحجوزات واقعية لإنشاد ديني، تلاوات، ومكساج لتجربة كامل إمكانيات المنظومة وعرضها في أبهى صورة.
+            </p>
+            <div style="display: flex; gap: 8px; margin-top: auto;">
+              <button class="topbar-btn primary" id="btnLoadDemoData" style="flex: 1; justify-content: center;">
+                <span>✨ تحميل بيانات تجريبية</span>
+              </button>
+              <button class="topbar-btn" id="btnClearAllData" style="color: var(--crimson-accent);">
+                <span>مسح الكل</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="booking-card">
+            <h4 style="font-size: 16px; color: var(--blue-accent);">💾 النسخ الاحتياطي والاستعادة</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+              احفظ نسخة احتياطية من كل حجوزاتك على جهازك، أو استعد نسخة محفوظة سابقاً في أي وقت وبكل سهولة.
+            </p>
+            <div style="display: flex; gap: 8px; margin-top: auto;">
+              <button class="topbar-btn" id="btnExportJSON" style="flex: 1; justify-content: center;">
+                <span>حفظ نسخة (JSON)</span>
+              </button>
+              <label class="topbar-btn" style="flex: 1; justify-content: center; cursor: pointer;">
+                <span>استعادة نسخة</span>
+                <input type="file" id="importFileInput" accept=".json" style="display: none;">
+              </label>
+            </div>
+          </div>
+
+          <div class="booking-card">
+            <h4 style="font-size: 16px; color: var(--gold-primary);">🔐 تغيير بيانات الدخول</h4>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.7;">
+              غيّر اسم المستخدم أو كلمة المرور. أدخل كلمة المرور الحالية لتأكيد التغيير.
+            </p>
+            <form id="changeCredentialsForm" style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="form-group">
+                <label for="currentPassword">كلمة المرور الحالية</label>
+                <input class="form-control" type="password" id="currentPassword" required autocomplete="current-password">
+              </div>
+              <div class="form-group">
+                <label for="newUsername">اسم المستخدم</label>
+                <input class="form-control" type="text" id="newUsername" required maxlength="40" autocomplete="username">
+              </div>
+              <div class="form-group">
+                <label for="newPassword">كلمة المرور الجديدة</label>
+                <input class="form-control" type="password" id="newPassword" minlength="8" autocomplete="new-password">
+              </div>
+              <div class="form-group">
+                <label for="confirmNewPassword">تأكيد كلمة المرور الجديدة</label>
+                <input class="form-control" type="password" id="confirmNewPassword" minlength="8" autocomplete="new-password">
+              </div>
+              <button class="topbar-btn primary" type="submit" style="justify-content: center;">حفظ بيانات الدخول</button>
+            </form>
+            <small style="color: var(--text-faint);">بيانات الدخول تُحفظ في هذا المتصفح فقط، ولا تتزامن تلقائيًا بين الأجهزة.</small>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL 1: VIEW DETAILS & INVOICE / RECEIPT
+       ======================================================================== -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="modalHeadTitle">تفاصيل الحجز وسند القبض</h3>
+        <div style="display: flex; gap: 8px;">
+          <button class="topbar-btn primary modal-actions-print" id="btnPrintInvoice">
+            <span>🖨️ طباعة الفاتورة</span>
+          </button>
+          <button class="modal-close-btn" id="btnCloseDetailModal">×</button>
+        </div>
+      </div>
+
+      <div class="invoice-printable" id="invoicePaper">
+        <div class="invoice-header-strip">
+          <div class="inv-brand">
+            <h2>استوديو أَثَر للإنتاج الفني</h2>
+            <p>سند استلام حجز وتسجيل صوتي رسمي • ATHAR SOUND STUDIO</p>
+            <p style="font-size: 11px; color: #818e87;">هاتف: 01000000000 • العنوان: استوديو أثر للصوتيات</p>
+          </div>
+          <div class="inv-meta">
+            <div class="inv-num" id="invCode">#ATH-2026-001</div>
+            <div style="color: #6a7770;" id="invDate">التاريخ: 22 أكتوبر 2026</div>
+            <div style="margin-top: 4px;" id="invStatusPill">
+              <span style="background: #e1f5eb; color: #15803d; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;">مؤكد</span>
+            </div>
+          </div>
+        </div>
+
+        <table class="invoice-table">
+          <tbody>
+            <tr>
+              <th style="width: 20%;">اسم العميل / المنشد</th>
+              <td style="width: 30%; font-weight: 700;" id="invClientName">—</td>
+              <th style="width: 20%;">رقم الهاتف</th>
+              <td style="width: 30%;" id="invClientPhone">—</td>
+            </tr>
+            <tr>
+              <th>العمل الفني</th>
+              <td id="invWorkTitle" style="color: #b78335; font-weight: 700;">—</td>
+              <th>نوع الخدمة</th>
+              <td id="invService">—</td>
+            </tr>
+            <tr>
+              <th>موعد الجلسة</th>
+              <td id="invSessionTime">—</td>
+              <th>مدة الجلسة</th>
+              <td id="invDuration">—</td>
+            </tr>
+            <tr>
+              <th>المقام الموسيقي</th>
+              <td id="invMaqam">—</td>
+              <th>مهندس الصوت</th>
+              <td id="invEngineer">—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="invoice-totals-box">
+          <div class="inv-row">
+            <span>تكلفة الجلسة والخدمات الفنية:</span>
+            <strong id="invTotalAmount">0 ج.م</strong>
+          </div>
+          <div class="inv-row">
+            <span>العربون المدفوع (المسدد نقداً / إلكترونياً):</span>
+            <strong style="color: #15803d;" id="invDepositAmount">0 ج.م</strong>
+          </div>
+          <div class="inv-row grand">
+            <span>المبلغ المتبقي للتحصيل عند التسليم:</span>
+            <strong style="color: #b78335;" id="invRemainingAmount">0 ج.م</strong>
+          </div>
+          <div style="font-size: 11px; color: #727e78; margin-top: 4px;" id="invTafqeet">
+            فقط وقدره: صفر جنيه مصري لا غير.
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 12px; color: #526059;" id="invNotesBox">
+          <strong>ملاحظات فنية:</strong> <span id="invNotesText">لا توجد ملاحظات</span>
+        </div>
+
+        <div class="invoice-footer-terms">
+          <strong>شروط وأحكام الاستوديو:</strong>
+          <ol style="margin-right: 18px; margin-top: 4px;">
+            <li>يرجى الحضور قبل موعد الجلسة بـ 15 دقيقة لضبط إعدادات الصوت وتجهيز النفس.</li>
+            <li>في حال التأخير يُحسب الوقت من وقت الحجز الأصلي المحدد في هذا السند.</li>
+            <li>يتم تسليم التراكات النهائية وماستر الصوت بعد سداد كامل المبلغ المتبقي.</li>
+          </ol>
+        </div>
+
+        <div class="invoice-signatures">
+          <div class="sig-box">توقيع العميل / المنشد</div>
+          
+          <!-- Official Circular Stamp Seal -->
+          <div class="official-stamp-seal">
+            <span style="font-size: 8px;">★ أَثَــــر ★</span>
+            <span style="font-size: 12px;">معتمد</span>
+            <span style="font-size: 7px;">ATHAR STUDIO</span>
+          </div>
+
+          <div class="sig-box">ختم وتوقيع إدارة استوديو أثر</div>
+        </div>
+      </div>
+
+      <div style="padding: 16px 24px; border-top: 1px solid var(--border-subtle); display: flex; gap: 10px; background: var(--bg-surface);">
+        <button class="topbar-btn" id="btnModalWhatsApp" style="background: #25d366; color: #fff; font-weight: 700;">
+          <span>💬 مراسلة واتساب</span>
+        </button>
+        <button class="topbar-btn" id="btnModalEdit">
+          <span>✏️ تعديل الحجز</span>
+        </button>
+        <button class="topbar-btn" id="btnModalClose" style="margin-right: auto;">
+          <span>إغلاق</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: STUDIO RATE CALCULATOR
+       ======================================================================== -->
+  <div class="modal-overlay" id="calcModal">
+    <div class="modal-window" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3>🖩 حاسبة أسعار الاستوديو الذكية</h3>
+        <button class="modal-close-btn" id="btnCloseCalcModal">×</button>
+      </div>
+
+      <div style="padding: 24px;">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>عدد ساعات التسجيل بالاستوديو</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="range" id="calcHoursRange" min="1" max="10" value="2" style="flex: 1; accent-color: var(--gold-primary);">
+            <strong id="calcHoursLabel" style="font-size: 16px; width: 60px; text-align: center;">2 ساعة</strong>
+          </div>
+          <div style="font-size: 11px; color: var(--text-faint); margin-top: 4px;">سعر الساعة الأساسي: 400 ج.م</div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>غرفة الاستوديو</label>
+          <select class="form-control" id="calcRoomSelect">
+            <option value="0">Vocal Booth A (عزل كامل للصوت المنفرد) - مجاني</option>
+            <option value="250">Live Room B (استوديو الكورال الواسع والإيقاع) (+250 ج.م)</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="font-size: 12px; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 8px;">
+            خدمات فنية إضافية:
+          </label>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label class="calc-addon" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+              <input type="checkbox" id="calcAddonMix" value="700" style="width: 18px; height: 18px; accent-color: var(--gold-primary);">
+              <span>هندسة صوتية ومكساج وماسترينغ احترافي (+700 ج.م)</span>
+            </label>
+            <label class="calc-addon" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+              <input type="checkbox" id="calcAddonTuning" value="350" style="width: 18px; height: 18px; accent-color: var(--gold-primary);">
+              <span>تيونينغ وتصحيح مقام (Melodyne / Auto-tune) (+350 ج.م)</span>
+            </label>
+            <label class="calc-addon" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+              <input type="checkbox" id="calcAddonChoir" value="800" style="width: 18px; height: 18px; accent-color: var(--gold-primary);">
+              <span>كتابة وهارمونايز فوكال وكورال (+800 ج.م)</span>
+            </label>
+            <label class="calc-addon" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+              <input type="checkbox" id="calcAddonVideo" value="1200" style="width: 18px; height: 18px; accent-color: var(--gold-primary);">
+              <span>تصوير فيديو كليب / ريلز استوديو 4K (+1200 ج.م)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="money-calc-box">
+          <div>
+            <span style="font-size: 12px; color: var(--text-muted);">التكلفة التقديرية</span>
+            <div style="font-size: 26px; font-weight: 900; color: var(--gold-primary);" id="calcTotalResult">1,500 ج.م</div>
+          </div>
+          <div style="text-align: left;">
+            <span style="font-size: 11px; color: var(--text-muted);">العربون المقترح (50%)</span>
+            <div style="font-size: 16px; font-weight: 700; color: var(--emerald-accent);" id="calcDepositResult">750 ج.م</div>
+          </div>
+        </div>
+
+        <button class="btn-submit" id="btnApplyCalcToForm" style="width: 100%; margin-top: 18px;">
+          <span>نقل هذه التكلفة إلى نموذج الحجز ➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ========================================================================
+       JAVASCRIPT ARCHITECTURE & LOGIC
+       ======================================================================== -->
+  <script>
+    /* ========================================================================
+       0. CORE ESSENTIAL HELPERS (DECLARED FIRST TO PREVENT TDZ ERRORS)
+       ======================================================================== */
+    const $ = id => document.getElementById(id);
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function getTodayISO() {
+      const d = new Date();
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    }
+
+    function getDateOffsetISO(offsetDays) {
+      const d = new Date();
+      d.setDate(d.getDate() + offsetDays);
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    }
+
+    function formatMoney(num) {
+      const n = Number(num) || 0;
+      return new Intl.NumberFormat('ar-EG', { maximumFractionDigits: 0 }).format(n) + ' ج.م';
+    }
+
+    function formatDateArabic(isoStr) {
+      if (!isoStr) return '—';
+      const d = new Date(isoStr + 'T12:00:00');
+      return new Intl.DateTimeFormat('ar-EG', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(d);
+    }
+
+    function formatTimeArabic(timeStr) {
+      if (!timeStr) return '—';
+      let [h, m] = timeStr.split(':').map(Number);
+      const period = h >= 12 ? 'م' : 'ص';
+      h = h % 12 || 12;
+      return `${h}:${pad(m)} ${period}`;
+    }
+
+    function safeHTML(str) {
+      return String(str ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    function getRemaining(booking) {
+      if (!booking) return 0;
+      return Math.max(0, (Number(booking.total) || 0) - (Number(booking.deposit) || 0));
+    }
+
+    /* ========================================================================
+       1. BULLETPROOF LOGIN & AUTHENTICATION HANDLERS
+       ======================================================================== */
+    const AUTH_KEY = 'athar_auth_session_v4';
+    const USERNAME_KEY = 'athar_admin_username_v1';
+    const PASSWORD_KEY = 'athar_admin_password_v1';
+    const DEFAULT_USERNAME = 'admin';
+    const DEFAULT_PASSWORD = 'athar2026';
+
+    function handleLogin(e) {
+      if (e && e.preventDefault) e.preventDefault();
+
+      const uEl = document.getElementById('loginUsername');
+      const pEl = document.getElementById('loginPassword');
+      const errEl = document.getElementById('loginErrorAlert');
+      const remEl = document.getElementById('loginRememberMe');
+      const splash = document.getElementById('splash');
+
+      const username = (uEl ? uEl.value : '').trim();
+      const password = pEl ? pEl.value : '';
+      let savedUsername;
+      let savedPassword;
+      try {
+        savedUsername = localStorage.getItem(USERNAME_KEY) || DEFAULT_USERNAME;
+        savedPassword = localStorage.getItem(PASSWORD_KEY) || DEFAULT_PASSWORD;
+      } catch (err) {
+        if (errEl) {
+          errEl.textContent = 'تعذر قراءة بيانات الدخول من هذا المتصفح.';
+          errEl.style.display = 'block';
+        }
+        return false;
+      }
+
+      const isValid = username === savedUsername && password === savedPassword;
+
+      if (isValid) {
+        if (errEl) errEl.style.display = 'none';
+
+        try {
+          if (remEl && remEl.checked) {
+            localStorage.setItem(AUTH_KEY, '1');
+          } else {
+            sessionStorage.setItem(AUTH_KEY, '1');
+          }
+        } catch (err) {}
+
+        if (splash) {
+          splash.style.display = 'none';
+          splash.classList.add('hide');
+        }
+
+        playBeep('success');
+        showToast('مرحباً بك يا مدير الاستوديو! تم تسجيل الدخول بنجاح 🎉', 'success');
+      } else {
+        if (errEl) {
+          errEl.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة.';
+          errEl.style.display = 'block';
+        }
+        playBeep('record');
+      }
+      return false;
+    }
+
+    function togglePasswordVisibility() {
+      const pEl = document.getElementById('loginPassword');
+      const btn = document.getElementById('togglePasswordBtn');
+      if (pEl) {
+        if (pEl.type === 'password') {
+          pEl.type = 'text';
+          if (btn) btn.textContent = '👁️‍🗨️';
+        } else {
+          pEl.type = 'password';
+          if (btn) btn.textContent = '👁️';
+        }
+      }
+    }
+
+    function handleLogout() {
+      try {
+        localStorage.removeItem(AUTH_KEY);
+        sessionStorage.removeItem(AUTH_KEY);
+      } catch (e) {}
+
+      const splash = document.getElementById('splash');
+      if (splash) {
+        splash.style.display = 'flex';
+        splash.classList.remove('hide');
+      }
+      showToast('تم تسجيل الخروج من لوحة التحكم بنجاح.', 'info');
+    }
+
+    try {
+      const savedUsername = localStorage.getItem(USERNAME_KEY);
+      if (savedUsername) document.getElementById('loginUsername').value = savedUsername;
+      if (localStorage.getItem(AUTH_KEY) === '1' || sessionStorage.getItem(AUTH_KEY) === '1') {
+        const splash = document.getElementById('splash');
+        if (splash) {
+          splash.style.display = 'none';
+          splash.classList.add('hide');
+        }
+      }
+    } catch (e) {}
+
+    /* ========================================================================
+       2. CONSTANTS & INITIAL DATA
+       ======================================================================== */
+    const STORAGE_KEY = 'athar_studio_bookings_v2';
+    const OLD_STORAGE_KEY = 'asraa_studio_bookings_v1';
+    const THEME_KEY = 'athar_theme_mode';
+    const SOUND_KEY = 'athar_sound_enabled';
+
+    let bookings = [];
+    let lastAddedId = null;
+
+    /* ========================================================================
+       PRESETS FOR INSTANT ONE-CLICK FORM FILLING
+       ======================================================================== */
+    window.fillPreset = function(type) {
+      playBeep('click');
+      resetForm();
+      const today = getTodayISO();
+      $('bookingDate').value = today;
+
+      if (type === 'nashid') {
+        $('clientName').value = 'الشيخ محمد التهامي';
+        $('clientPhone').value = '01023456789';
+        $('workTitle').value = 'قصيدة البردة الشريفة';
+        $('serviceType').value = 'تسجيل إنشاد ديني';
+        $('musicMaqam').value = 'نهاوند';
+        $('soundEngineer').value = 'م/ أحمد فاروق';
+        $('sessionDuration').value = '2';
+        $('bookingTime').value = '17:00';
+        $('totalPrice').value = '1800';
+        $('depositPaid').value = '1000';
+        $('bookingNotes').value = 'تسجيل فوكال منفرد بالمايكروفون Neumann U87، ريفيرب ناعم';
+      } else if (type === 'quran') {
+        $('clientName').value = 'القارئ عبد الله العوضي';
+        $('clientPhone').value = '01156789012';
+        $('workTitle').value = 'تلاوة خاشعة - سورة يس';
+        $('serviceType').value = 'تلاوة قرآنية';
+        $('musicMaqam').value = 'بياتي';
+        $('soundEngineer').value = 'م/ أحمد فاروق';
+        $('sessionDuration').value = '1';
+        $('bookingTime').value = '15:00';
+        $('totalPrice').value = '900';
+        $('depositPaid').value = '500';
+        $('bookingNotes').value = 'صدى شرقي خاشع متوازن';
+      } else if (type === 'podcast') {
+        $('clientName').value = 'د. طارق الحبيب';
+        $('clientPhone').value = '01234567891';
+        $('workTitle').value = 'بودكاست: بصائر النور (الحلقة 1)';
+        $('serviceType').value = 'بودكاست';
+        $('musicMaqam').value = '';
+        $('soundEngineer').value = 'م/ محمود الشريف';
+        $('sessionDuration').value = '2';
+        $('bookingTime').value = '19:00';
+        $('totalPrice').value = '1400';
+        $('depositPaid').value = '700';
+        $('bookingNotes').value = 'تسجيل حلقة حوارية 2 مايك Shure SM7B';
+      } else if (type === 'choral') {
+        $('clientName').value = 'فرقة نور المصطفى';
+        $('clientPhone').value = '01567890123';
+        $('workTitle').value = 'أوبريت: أشرق البدر علينا';
+        $('serviceType').value = 'فوكال وكورال';
+        $('musicMaqam').value = 'رست';
+        $('soundEngineer').value = 'م/ أحمد فاروق';
+        $('sessionDuration').value = '3';
+        $('bookingTime').value = '20:00';
+        $('totalPrice').value = '2700';
+        $('depositPaid').value = '1500';
+        $('bookingNotes').value = 'حجز قاعة الكورال لـ 5 منشدين مع هارموني صوتي';
+      }
+
+      updateMoneyPreview();
+      auditFormConflicts();
+      showToast('تمت تعبئة النموذج بنجاح! اضغط "حفظ في السجل والإكسل" لإتمام الحجز 🎉', 'info');
+      $('clientName').focus();
+    };
+    let activeFilter = 'all';
+    let currentViewMode = 'table';
+    let currentCalDate = new Date();
+    let selectedCalDayStr = getTodayISO();
+    let currentInvoiceBooking = null;
+    let soundEnabled = true;
+    let isServerConnected = false;
+
+    // ON AIR Stopwatch State
+    let timerInterval = null;
+    let timerSeconds = 0;
+    let isTimerRunning = false;
+    let currentTake = 1;
+
+    const labels = {
+      pending: 'قيد التأكيد',
+      confirmed: 'مؤكد',
+      recording: 'جاري التسجيل',
+      done: 'تم التسجيل',
+      completed: 'مكتمل ومُسلّم',
+      cancelled: 'ملغي'
+    };
+
+    /* ========================================================================
+       3. REALISTIC ISLAMIC SOUND STUDIO PRESET DATA
+       ======================================================================== */
+    const DEMO_BOOKINGS = [
+      {
+        id: 'ath_demo_1',
+        name: 'الشيخ محمود القزاز',
+        phone: '01012345678',
+        workTitle: 'أنشودة: قمرٌ سيدنا النبي',
+        service: 'تسجيل إنشاد ديني',
+        maqam: 'نهاوند',
+        engineer: 'م/ أحمد فاروق',
+        date: getTodayISO(),
+        time: '17:00',
+        duration: '2',
+        status: 'recording',
+        total: 1800,
+        deposit: 1000,
+        notes: 'تسجيل فوكال منفرد بالمايكروفون Neumann U87، ريفيرب ناعم',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'ath_demo_2',
+        name: 'المنشد عبد الرحمن الشريف',
+        phone: '01198765432',
+        workTitle: 'ابتهال: يا من يرى ما في الضمير',
+        service: 'تسجيل صوتي',
+        maqam: 'بياتي',
+        engineer: 'م/ عبد الرحمن',
+        date: getTodayISO(),
+        time: '20:30',
+        duration: '3',
+        status: 'confirmed',
+        total: 2400,
+        deposit: 1200,
+        notes: 'تجهيز صدى صوت شرقي متوازن، تصحيح بسيط للقرار',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'ath_demo_3',
+        name: 'فريق صدى الإيمان',
+        phone: '01234567890',
+        workTitle: 'أوبريت: طلع البدر علينا',
+        service: 'فوكال وكورال',
+        maqam: 'رست',
+        engineer: 'م/ أحمد فاروق',
+        date: getDateOffsetISO(1),
+        time: '18:00',
+        duration: '4',
+        status: 'confirmed',
+        total: 3800,
+        deposit: 2000,
+        notes: 'حجز استوديو Live Room B، عدد المنشدين 6 أفراد',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'ath_demo_4',
+        name: 'د. مصطفى نور الدين',
+        phone: '01055566677',
+        workTitle: 'بودكاست: قبسات نورانية (الحلقة 12)',
+        service: 'بودكاست',
+        maqam: '',
+        engineer: 'م/ محمود الشريف',
+        date: getDateOffsetISO(2),
+        time: '15:00',
+        duration: '2',
+        status: 'pending',
+        total: 1400,
+        deposit: 500,
+        notes: 'تسجيل حلقة حوارية مع ضيف، 2 مايكروفون Shure SM7B',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'ath_demo_5',
+        name: 'القارئ بلال الحسيني',
+        phone: '01511223344',
+        workTitle: 'تلاوة سورة الرحمن برواية حفص',
+        service: 'تلاوة قرآنية',
+        maqam: 'حجاز',
+        engineer: 'م/ عبد الرحمن',
+        date: getDateOffsetISO(3),
+        time: '19:00',
+        duration: '3',
+        status: 'confirmed',
+        total: 2600,
+        deposit: 2600,
+        notes: 'مسدد بالكامل، طلب نسخة ماسترينغ بدون مؤثرات صناعية',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'ath_demo_6',
+        name: 'المنشد عمر الحلبي',
+        phone: '01099887766',
+        workTitle: 'قصيدة البردة المباركة',
+        service: 'مكساج وماستر',
+        maqam: 'سيكاه',
+        engineer: 'م/ أحمد فاروق',
+        date: getDateOffsetISO(-1),
+        time: '16:00',
+        duration: '4',
+        status: 'completed',
+        total: 3200,
+        deposit: 3200,
+        notes: 'تم تسليم العمل والماسترينغ بنجاح للعميل',
+        createdAt: new Date().toISOString()
+      }
+    ];
+
+    /* ========================================================================
+       4. NUMBER SPELLING HELPER (TAFQEET)
+       ======================================================================== */
+    function numberToArabicWords(n) {
+      const num = Math.floor(Number(n) || 0);
+      if (num === 0) return 'صفر جنيه مصري';
+      const ones = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة',
+        'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+      const tens = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+      const hundreds = ['', 'مائة', 'مائتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
+      
+      if (num < 20) return ones[num] + ' جنيه مصري لا غير';
+      if (num < 100) {
+        const o = num % 10;
+        const t = Math.floor(num / 10);
+        return (o ? ones[o] + ' و' : '') + tens[t] + ' جنيه مصري لا غير';
+      }
+      if (num < 1000) {
+        const h = Math.floor(num / 100);
+        const rem = num % 100;
+        return hundreds[h] + (rem ? ' و' + numberToArabicWords(rem).replace(' جنيه مصري لا غير', '') : '') + ' جنيه مصري لا غير';
+      }
+      if (num < 1000000) {
+        const th = Math.floor(num / 1000);
+        const rem = num % 1000;
+        let thStr = th === 1 ? 'ألف' : (th === 2 ? 'ألفان' : (th >= 3 && th <= 10 ? ones[th] + ' آلاف' : numberToArabicWords(th).replace(' جنيه مصري لا غير', '') + ' ألف'));
+        return thStr + (rem ? ' و' + numberToArabicWords(rem).replace(' جنيه مصري لا غير', '') : '') + ' جنيه مصري لا غير';
+      }
+      return num + ' جنيه مصري لا غير';
+    }
+
+    /* ========================================================================
+       5. SYNTHETIC AUDIO FEEDBACK (WEB AUDIO API)
+       ======================================================================== */
+    let audioCtx = null;
+    function playBeep(type = 'click') {
+      if (!soundEnabled) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === 'record') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        }
+      } catch (e) {}
+    }
+
+    /* ========================================================================
+       6. EXCEL (.XLSX) GENERATION & LOCAL SYNC
+       ======================================================================== */
+    function formatForExcelExport(data) {
+      return data.map((b, i) => {
+        const code = b.id ? ('ATH-' + b.id.slice(-6).toUpperCase()) : `ATH-${String(i + 1).padStart(3, '0')}`;
+        const total = Number(b.total) || 0;
+        const deposit = Number(b.deposit) || 0;
+        const remaining = Math.max(0, total - deposit);
+
+        return {
+          'رقم الحجز': code,
+          'اسم المنشد / العميل': b.name || '',
+          'رقم الهاتف': b.phone || '',
+          'العمل الفني': b.workTitle || '',
+          'نوع الخدمة': b.service || '',
+          'المقام الموسيقي': b.maqam || 'حر',
+          'مهندس الصوت': b.engineer || 'م/ أحمد فاروق',
+          'تاريخ الجلسة': b.date || '',
+          'وقت البداية': b.time || '',
+          'مدة الجلسة (ساعات)': Number(b.duration) || 1,
+          'السعر الإجمالي (ج.م)': total,
+          'العربون المدفوع (ج.م)': deposit,
+          'المتبقي (ج.م)': remaining,
+          'حالة الحجز': labels[b.status] || b.status,
+          'ملاحظات فنية': b.notes || '',
+          'تاريخ التسجيل': b.createdAt || ''
+        };
+      });
+    }
+
+    function exportToExcelNative() {
+      playBeep('success');
+      const filename = `حجوزات_استوديو_أثر_${getTodayISO()}`;
+
+      // Native XLSX via SheetJS
+      if (typeof XLSX !== 'undefined') {
+        const rows = formatForExcelExport(bookings);
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(rows);
+
+        ws['!cols'] = [
+          { wch: 14 }, { wch: 25 }, { wch: 16 }, { wch: 30 },
+          { wch: 22 }, { wch: 14 }, { wch: 18 }, { wch: 14 },
+          { wch: 12 }, { wch: 16 }, { wch: 18 }, { wch: 18 },
+          { wch: 16 }, { wch: 16 }, { wch: 45 }, { wch: 22 }
+        ];
+
+        XLSX.utils.book_append_sheet(wb, ws, 'سجل حجوزات استوديو أثر');
+        XLSX.writeFile(wb, `${filename}.xlsx`);
+        showToast(`تم تنزيل وحفظ ملف الإكسل بنجاح: ${filename}.xlsx 📊`, 'success');
+      } else {
+        // Fallback UTF-8 CSV with BOM for Excel compatibility
+        const headers = ['رقم الحجز', 'اسم العميل', 'رقم الهاتف', 'العمل الفني', 'نوع الخدمة', 'المقام', 'المهندس', 'التاريخ', 'الوقت', 'المدة (ساعة)', 'الإجمالي', 'العربون', 'المتبقي', 'الحالة', 'ملاحظات'];
+        const csvRows = bookings.map(b => [
+          b.id,
+          `"${(b.name || '').replace(/"/g, '""')}"`,
+          `"${b.phone || ''}"`,
+          `"${(b.workTitle || '').replace(/"/g, '""')}"`,
+          `"${b.service || ''}"`,
+          `"${b.maqam || ''}"`,
+          `"${b.engineer || ''}"`,
+          b.date,
+          b.time,
+          b.duration || 1,
+          b.total || 0,
+          b.deposit || 0,
+          getRemaining(b),
+          labels[b.status] || b.status,
+          `"${(b.notes || '').replace(/"/g, '""')}"`
+        ]);
+
+        const csvContent = '\uFEFF' + [headers.join(','), ...csvRows.map(r => r.join(','))].join('\r\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${filename}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('تم تصدير ملف الإكسل العربي بنجاح 📊', 'success');
+      }
+
+      syncWithLocalServer();
+    }
+
+    function syncWithLocalServer() {
+      if (location.protocol.startsWith('http')) {
+        fetch('/api/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bookings)
+        }).then(r => r.json()).then(res => {
+          if (res.success) {
+            isServerConnected = true;
+            $('syncStatusText').innerHTML = `متصل بالخادم ويحفظ في الإكسل تلقائياً: <b>حجوزات_استوديو_أثر.xlsx</b> (${res.count} جلسة)`;
+            $('syncDot').style.background = 'var(--emerald-accent)';
+            $('btnOpenExcelOnPC').style.display = 'inline-flex';
+          }
+        }).catch(() => {
+          isServerConnected = false;
+          $('syncStatusText').innerHTML = `الخادم المحلي غير متصل (يحفظ في ذاكرة المتصفح). شغّل <b>تشغيل_الاستوديو.bat</b> للمزامنة التلقائية مع الإكسل.`;
+          $('syncDot').style.background = 'var(--amber-accent)';
+          $('btnOpenExcelOnPC').style.display = 'none';
+        });
+      } else {
+        isServerConnected = false;
+        $('syncStatusText').innerHTML = `وضع المتصفح المباشر: يحفظ في ذاكرة الجهاز (لتحديث ملف الإكسل على القرص شغّل <b>تشغيل_الاستوديو.bat</b> أو اضغط <b>تصدير إكسل</b>)`;
+        $('syncDot').style.background = 'var(--gold-primary)';
+        $('btnOpenExcelOnPC').style.display = 'none';
+      }
+    }
+
+    function openExcelOnDesktop() {
+      if (location.protocol.startsWith('http')) {
+        fetch('/api/open-excel', { method: 'POST' })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success) {
+              showToast('جاري فتح ملف الإكسل على جهازك الآن 📂', 'success');
+            } else {
+              exportToExcelNative();
+            }
+          }).catch(() => exportToExcelNative());
+      } else {
+        exportToExcelNative();
+      }
+    }
+
+    /* ========================================================================
+       7. DATA PERSISTENCE & LOADING
+       ======================================================================== */
+    function loadData() {
+      let hasStoredBookings = false;
+      try {
+        let raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) raw = localStorage.getItem(OLD_STORAGE_KEY);
+        if (raw) {
+          const savedBookings = JSON.parse(raw);
+          if (Array.isArray(savedBookings)) {
+            bookings = savedBookings;
+            hasStoredBookings = true;
+          }
+        }
+      } catch (e) {
+        bookings = [];
+      }
+
+      if (!Array.isArray(bookings)) bookings = [];
+      if (!hasStoredBookings) {
+        bookings = JSON.parse(JSON.stringify(DEMO_BOOKINGS));
+        persistData(false);
+      }
+
+      if (location.protocol.startsWith('http')) {
+        fetch('/api/bookings')
+          .then(r => r.json())
+          .then(serverBookings => {
+            if (Array.isArray(serverBookings) && serverBookings.length > 0) {
+              bookings = serverBookings;
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings)); } catch (e) {}
+              renderAll();
+              isServerConnected = true;
+              $('syncStatusText').innerHTML = `متصل بالخادم ويحفظ في الإكسل تلقائياً: <b>حجوزات_استوديو_أثر.xlsx</b> (${bookings.length} جلسة)`;
+              $('syncDot').style.background = 'var(--emerald-accent)';
+              $('btnOpenExcelOnPC').style.display = 'inline-flex';
+            } else if (bookings.length > 0) {
+              // Server has no bookings yet, sync client data to server immediately
+              syncWithLocalServer();
+            }
+          }).catch(() => {
+            isServerConnected = false;
+            $('syncStatusText').innerHTML = `الخادم المحلي غير متصل (يحفظ في ذاكرة المتصفح). شغّل <b>تشغيل_الاستوديو.bat</b> للمزامنة مع الإكسل.`;
+            $('syncDot').style.background = 'var(--amber-accent)';
+            $('btnOpenExcelOnPC').style.display = 'none';
+          });
+      } else {
+        // file:// mode
+        isServerConnected = false;
+        $('syncStatusText').innerHTML = `وضع المتصفح المباشر: يحفظ في ذاكرة الجهاز (لتحديث ملف الإكسل على القرص شغّل <b>تشغيل_الاستوديو.bat</b> أو اضغط <b>تصدير إكسل</b>)`;
+        $('syncDot').style.background = 'var(--gold-primary)';
+        $('btnOpenExcelOnPC').style.display = 'none';
+      }
+    }
+
+    function persistData(syncServer = true) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+      } catch (e) {
+        showToast('تعذر حفظ البيانات في الذاكرة المحلية.', 'error');
+      }
+
+      if (syncServer) {
+        syncWithLocalServer();
+      }
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = $('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast-msg ${type}`;
+      
+      let icon = 'ℹ️';
+      if (type === 'success') icon = '✅';
+      if (type === 'error') icon = '⚠️';
+      
+      toast.innerHTML = `<span>${icon}</span><span>${safeHTML(msg)}</span>`;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(15px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 2800);
+    }
+
+    /* ========================================================================
+       8. KPI RENDERING & BUSINESS METRICS
+       ======================================================================== */
+    function renderKPIs() {
+      const today = getTodayISO();
+      const active = bookings.filter(b => b.status !== 'cancelled');
+      const todaySessions = active.filter(b => b.date === today);
+      const upcoming = active.filter(b => b.date >= today && b.status !== 'completed' && b.status !== 'done');
+      
+      const totalRev = active.reduce((sum, b) => sum + (Number(b.total) || 0), 0);
+      const totalDep = active.reduce((sum, b) => sum + (Number(b.deposit) || 0), 0);
+      const totalRem = active.reduce((sum, b) => sum + getRemaining(b), 0);
+      const totalHours = active.reduce((sum, b) => sum + (Number(b.duration) || 1), 0);
+      
+      const collectRate = totalRev > 0 ? Math.min(100, Math.round((totalDep / totalRev) * 100)) : 0;
+
+      $('kpiTodayCount').textContent = todaySessions.length;
+      $('kpiUpcomingCount').textContent = upcoming.length;
+      $('kpiRevenueTotal').textContent = formatMoney(totalRev);
+      $('kpiCollectedTotal').textContent = formatMoney(totalDep);
+      $('kpiRemainingTotal').textContent = formatMoney(totalRem);
+      $('kpiTotalHours').textContent = totalHours + ' س';
+      
+      $('kpiCollectRateBar').style.width = collectRate + '%';
+      $('kpiCollectRateBar').title = `نسبة التحصيل: ${collectRate}%`;
+      
+      $('tabCountBadge').textContent = bookings.length;
+
+      // Update chip counts
+      if ($('chipCountToday')) $('chipCountToday').textContent = `(${todaySessions.length})`;
+      const dueCount = active.filter(b => getRemaining(b) > 0).length;
+      if ($('chipCountDue')) $('chipCountDue').textContent = `(${dueCount})`;
+    }
+
+    /* ========================================================================
+       9. BOOKINGS LIST & CARDS RENDERING + QUICK STATUS TOGGLE
+       ======================================================================== */
+    function getFilteredBookings() {
+      const query = $('searchInput').value.trim().toLowerCase();
+      const status = $('filterStatus').value;
+      const service = $('filterService').value;
+      const date = $('filterDate').value;
+      const today = getTodayISO();
+
+      return bookings.filter(b => {
+        if (query) {
+          const matchTarget = `${b.name} ${b.phone} ${b.workTitle || ''} ${b.id}`.toLowerCase();
+          if (!matchTarget.includes(query)) return false;
+        }
+        if (status !== 'all' && b.status !== status) return false;
+        if (service !== 'all' && b.service !== service) return false;
+        if (date && b.date !== date) return false;
+
+        if (activeFilter === 'today' && b.date !== today) return false;
+        if (activeFilter === 'upcoming' && (b.date < today || b.status === 'completed' || b.status === 'cancelled')) return false;
+        if (activeFilter === 'due' && getRemaining(b) <= 0) return false;
+        if (activeFilter === 'nashid' && !b.service.includes('إنشاد')) return false;
+        if (activeFilter === 'recording' && b.status !== 'recording') return false;
+
+        return true;
+      }).sort((a, b) => {
+        if (lastAddedId) {
+          if (a.id === lastAddedId) return -1;
+          if (b.id === lastAddedId) return 1;
+        }
+        return (b.date + ' ' + (b.time || '')).localeCompare(a.date + ' ' + (a.time || ''));
+      });
+    }
+
+    // Quick toggle status on click
+    window.cycleBookingStatus = function(id) {
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      const order = ['pending', 'confirmed', 'recording', 'done', 'completed', 'cancelled'];
+      const nextIdx = (order.indexOf(b.status) + 1) % order.length;
+      b.status = order[nextIdx];
+
+      playBeep('click');
+      persistData();
+      renderAll();
+      showToast(`تم تغيير حالة حجز "${b.name}" إلى: ${labels[b.status]}`, 'info');
+    };
+
+    // Quick payment prompt
+    window.quickAddPayment = function(id) {
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      const rem = getRemaining(b);
+      const input = prompt(`تسجيل دفعة إضافية لحساب "${b.name}"\nالمتبقي المطلوب: ${formatMoney(rem)}\nأدخل قيمة الدفعة المسددة (ج.م):`, rem);
+      if (!input) return;
+
+      const addVal = Number(input);
+      if (isNaN(addVal) || addVal <= 0) {
+        showToast('يرجى إدخال مبلغ صحيح', 'error');
+        return;
+      }
+
+      b.deposit = (Number(b.deposit) || 0) + addVal;
+      playBeep('success');
+      persistData();
+      renderAll();
+      showToast(`تم تسجيل دفعة بقيمة ${formatMoney(addVal)} وتحديث ملف الإكسل بنجاح!`, 'success');
+    };
+
+    function renderBookings() {
+      const filtered = getFilteredBookings();
+      $('listFilteredCount').textContent = `${filtered.length} جلسة`;
+
+      const tbody = $('bookingsTableBody');
+      const cardsGrid = $('cardsGridContainer');
+      const emptyState = $('tableEmptyState');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        cardsGrid.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      // Table View
+      tbody.innerHTML = filtered.map(b => {
+        const rem = getRemaining(b);
+        const remClass = rem === 0 ? 'paid' : 'due';
+        const remLabel = rem === 0 ? 'مسدد بالكامل' : `متبقي ${formatMoney(rem)}`;
+        const quickPayBtn = rem > 0 ? `<button class="btn-quick-pay" title="تسجيل دفعة جديدة" onclick="quickAddPayment('${b.id}')">+ دفعة</button>` : '';
+        const maqamBadge = b.maqam ? `<span class="maqam-badge">${safeHTML(b.maqam)}</span>` : '';
+        const workTitle = b.workTitle ? `<div style="font-size: 11px; color: var(--gold-primary); font-weight: 600;">${safeHTML(b.workTitle)}</div>` : '';
+
+        const isJustAdded = b.id === lastAddedId;
+        const newBadge = isJustAdded ? '<span class="new-booking-flash-badge">✨ أُضيف للتو</span>' : '';
+        const rowClass = isJustAdded ? 'just-added-row' : '';
+
+        return `
+          <tr class="${rowClass}">
+            <td>
+              <div class="cell-client">
+                <div class="client-title"><span>${safeHTML(b.name)}</span>${newBadge}</div>
+                ${workTitle}
+                <div class="client-meta">
+                  <span dir="ltr">${safeHTML(b.phone)}</span>
+                  <span>• ${safeHTML(b.engineer || 'م/ أحمد فاروق')}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="font-weight: 700;">${formatDateArabic(b.date)}</div>
+              <div style="font-size: 11px; color: var(--text-muted);">${formatTimeArabic(b.time)} (${b.duration || 1} س)</div>
+            </td>
+            <td>
+              <div class="service-tag">
+                ${maqamBadge}
+                <span>${safeHTML(b.service)}</span>
+              </div>
+            </td>
+            <td>
+              <div class="money-cell">
+                <span class="money-total">${formatMoney(b.total)}</span>
+                <span class="money-rem ${remClass}">
+                  <span>${remLabel}</span>
+                  ${quickPayBtn}
+                </span>
+              </div>
+            </td>
+            <td>
+              <span class="status-badge status-${safeHTML(b.status)}" onclick="cycleBookingStatus('${b.id}')" title="انقر للتبديل السريع للحالة">
+                ${labels[b.status] || 'قيد التأكيد'}
+              </span>
+            </td>
+            <td>
+              <div class="action-group">
+                <button class="action-btn invoice" title="سند القبض والفاتورة" onclick="viewInvoice('${b.id}')">🖨️</button>
+                <button class="action-btn whatsapp" title="إرسال عبر واتساب" onclick="sendWhatsAppModal('${b.id}')">💬</button>
+                <button class="action-btn" title="تعديل الحجز" onclick="editBooking('${b.id}')">✎</button>
+                <button class="action-btn delete" title="حذف الحجز" onclick="deleteBooking('${b.id}')">×</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // Cards View
+      cardsGrid.innerHTML = filtered.map(b => {
+        const rem = getRemaining(b);
+        const quickPayBtn = rem > 0 ? `<button class="btn-quick-pay" onclick="quickAddPayment('${b.id}')">+ دفعة</button>` : '';
+        return `
+          <div class="booking-card">
+            <div class="card-top">
+              <div>
+                <div class="card-client-name">${safeHTML(b.name)}</div>
+                <div class="card-client-phone">${safeHTML(b.phone)}</div>
+              </div>
+              <span class="status-badge status-${safeHTML(b.status)}" onclick="cycleBookingStatus('${b.id}')" title="انقر للتبديل السريع للحالة">
+                ${labels[b.status] || 'قيد التأكيد'}
+              </span>
+            </div>
+
+            ${b.workTitle ? `<div style="font-size: 13px; font-weight: 700; color: var(--gold-primary);">🎵 ${safeHTML(b.workTitle)}</div>` : ''}
+
+            <div class="card-body-info">
+              <div class="card-info-item"><label>الخدمة</label><b>${safeHTML(b.service)}</b></div>
+              <div class="card-info-item"><label>المقام</label><b>${safeHTML(b.maqam || 'حر')}</b></div>
+              <div class="card-info-item"><label>الموعد</label><b>${formatDateArabic(b.date)}</b></div>
+              <div class="card-info-item"><label>التوقيت والمدة</label><b>${formatTimeArabic(b.time)} (${b.duration || 1} س)</b></div>
+              <div class="card-info-item"><label>السعر الإجمالي</label><b>${formatMoney(b.total)}</b></div>
+              <div class="card-info-item">
+                <label>المتبقي</label>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <b style="color: ${rem > 0 ? 'var(--crimson-accent)' : 'var(--emerald-accent)'};">${rem > 0 ? formatMoney(rem) : 'خالص'}</b>
+                  ${quickPayBtn}
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div style="font-size: 11px; color: var(--text-faint);">${safeHTML(b.engineer || 'م/ أحمد فاروق')}</div>
+              <div class="action-group">
+                <button class="action-btn invoice" title="سند القبض والفاتورة" onclick="viewInvoice('${b.id}')">🖨️</button>
+                <button class="action-btn whatsapp" title="واتساب" onclick="sendWhatsAppModal('${b.id}')">💬</button>
+                <button class="action-btn" title="تعديل" onclick="editBooking('${b.id}')">✎</button>
+                <button class="action-btn delete" title="حذف" onclick="deleteBooking('${b.id}')">×</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ========================================================================
+       10. CONFLICT DETECTION
+       ======================================================================== */
+    function checkTimeConflict(targetDate, targetTime, targetDurationHours, excludeBookingId = null) {
+      if (!targetDate || !targetTime) return null;
+      const [th, tm] = targetTime.split(':').map(Number);
+      const targetStartMinutes = th * 60 + tm;
+      const targetEndMinutes = targetStartMinutes + (Number(targetDurationHours) || 1) * 60;
+
+      for (const b of bookings) {
+        if (b.id === excludeBookingId) continue;
+        if (b.date !== targetDate) continue;
+        if (b.status === 'cancelled') continue;
+
+        const [bh, bm] = (b.time || '17:00').split(':').map(Number);
+        const bStart = bh * 60 + bm;
+        const bEnd = bStart + (Number(b.duration) || 1) * 60;
+
+        if (targetStartMinutes < bEnd && targetEndMinutes > bStart) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    function auditFormConflicts() {
+      const date = $('bookingDate').value;
+      const time = $('bookingTime').value;
+      const duration = $('sessionDuration').value;
+      const curId = $('bookingId').value;
+
+      const conflict = checkTimeConflict(date, time, duration, curId);
+      const alertBox = $('conflictAlertBox');
+
+      if (conflict) {
+        $('conflictAlertMsg').textContent = `يتداخل هذا التوقيت مع جلسة "${conflict.name}" (${formatTimeArabic(conflict.time)} لمدة ${conflict.duration} س). يرجى التنسيق لتفادي ازدواج الحجز.`;
+        alertBox.classList.add('show');
+      } else {
+        alertBox.classList.remove('show');
+      }
+    }
+
+    /* ========================================================================
+       11. FORM HANDLERS (ADD & EDIT BOOKING)
+       ======================================================================== */
+    function updateMoneyPreview() {
+      const total = Math.max(0, Number($('totalPrice').value) || 0);
+      const dep = Math.max(0, Number($('depositPaid').value) || 0);
+      const rem = Math.max(0, total - dep);
+
+      $('previewTotal').textContent = formatMoney(total);
+      $('previewDeposit').textContent = formatMoney(dep);
+      $('previewRemaining').textContent = formatMoney(rem);
+    }
+
+    function resetForm() {
+      $('bookingForm').reset();
+      $('bookingId').value = '';
+      $('bookingDate').value = getTodayISO();
+      $('bookingTime').value = '17:00';
+      $('sessionDuration').value = '2';
+      $('depositPaid').value = '0';
+      $('bookingStatus').value = 'confirmed';
+      $('formTitleText').textContent = 'حجز جلسة استوديو جديدة';
+      $('saveBtnText').textContent = 'حفظ في السجل والإكسل';
+      $('conflictAlertBox').classList.remove('show');
+      updateMoneyPreview();
+    }
+
+    $('bookingForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      let total = Number($('totalPrice').value);
+      const duration = Number($('sessionDuration').value) || 2;
+      if (!total || total <= 0) {
+        total = duration * 400;
+        $('totalPrice').value = total;
+      }
+
+      const deposit = Math.max(0, Number($('depositPaid').value) || 0);
+
+      if (deposit > total) {
+        showToast('العربون المدفوع لا يمكن أن يتجاوز السعر الإجمالي.', 'error');
+        return;
+      }
+
+      const id = $('bookingId').value;
+      const bookingData = {
+        name: $('clientName').value.trim(),
+        phone: $('clientPhone').value.trim(),
+        workTitle: $('workTitle').value.trim(),
+        service: $('serviceType').value,
+        maqam: $('musicMaqam').value,
+        engineer: $('soundEngineer').value,
+        date: $('bookingDate').value,
+        time: $('bookingTime').value,
+        duration: $('sessionDuration').value,
+        status: $('bookingStatus').value,
+        total,
+        deposit,
+        notes: $('bookingNotes').value.trim(),
+        updatedAt: new Date().toISOString()
+      };
+
+      if (id) {
+        const index = bookings.findIndex(b => b.id === id);
+        if (index >= 0) {
+          bookings[index] = { ...bookings[index], ...bookingData };
+          lastAddedId = id;
+          showToast('تم تحديث بيانات الحجز وحفظها في الإكسل بنجاح ✅', 'success');
+        }
+      } else {
+        const newBooking = {
+          id: 'ath_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+          ...bookingData,
+          createdAt: new Date().toISOString()
+        };
+        bookings.unshift(newBooking);
+        lastAddedId = newBooking.id;
+        showToast(`تمت إضافة حجز "${newBooking.name}" بنجاح وظهر في أعلى السجل وحُفظ في الإكسل! 🎉`, 'success');
+      }
+
+      // Clear filters so the added item is immediately visible
+      $('searchInput').value = '';
+      $('filterStatus').value = 'all';
+      $('filterService').value = 'all';
+      $('filterDate').value = '';
+      activeFilter = 'all';
+      document.querySelectorAll('.chip-btn').forEach(c => c.classList.toggle('active', c.dataset.chip === 'all'));
+
+      // Ensure table view is active
+      currentViewMode = 'table';
+      $('tableContainer').style.display = 'block';
+      $('cardsGridContainer').style.display = 'none';
+      $('viewModeTable').classList.add('active');
+      $('viewModeCards').classList.remove('active');
+
+      // Make sure we are on bookings tab
+      switchTab('bookings');
+
+      playBeep('success');
+      persistData();
+      renderAll();
+      resetForm();
+
+      // Scroll table to the top to see the newly added row
+      $('tableContainer').scrollTop = 0;
+      setTimeout(() => {
+        const targetRow = document.querySelector('.just-added-row');
+        if (targetRow) {
+          targetRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    });
+
+    window.editBooking = function(id) {
+      playBeep('click');
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      switchTab('bookings');
+
+      $('bookingId').value = b.id;
+      $('clientName').value = b.name;
+      $('clientPhone').value = b.phone;
+      $('workTitle').value = b.workTitle || '';
+      $('serviceType').value = b.service;
+      $('musicMaqam').value = b.maqam || '';
+      $('soundEngineer').value = b.engineer || 'م/ أحمد فاروق';
+      $('bookingDate').value = b.date;
+      $('bookingTime').value = b.time;
+      $('sessionDuration').value = b.duration || '2';
+      $('bookingStatus').value = b.status;
+      $('totalPrice').value = b.total;
+      $('depositPaid').value = b.deposit;
+      $('bookingNotes').value = b.notes || '';
+
+      $('formTitleText').textContent = 'تعديل بيانات الحجز';
+      $('saveBtnText').textContent = 'حفظ التعديلات في الإكسل';
+      updateMoneyPreview();
+      auditFormConflicts();
+
+      $('bookingFormSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    window.deleteBooking = function(id) {
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      if (confirm(`هل أنت متأكد من حذف حجز "${b.name}" نهائياً من سجل الاستوديو وملف الإكسل؟`)) {
+        playBeep('click');
+        bookings = bookings.filter(x => x.id !== id);
+        persistData();
+        renderAll();
+        showToast('تم حذف الحجز وتحديث ملف الإكسل', 'info');
+      }
+    };
+
+    /* ========================================================================
+       12. INVOICE & RECEIPT MODAL
+       ======================================================================== */
+    window.viewInvoice = function(id) {
+      playBeep('click');
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      currentInvoiceBooking = b;
+
+      const rem = getRemaining(b);
+      const code = 'ATH-' + (b.id.slice(-6).toUpperCase());
+
+      $('invCode').textContent = '#' + code;
+      $('invDate').textContent = 'التاريخ: ' + formatDateArabic(b.date);
+      $('invClientName').textContent = b.name;
+      $('invClientPhone').textContent = b.phone;
+      $('invWorkTitle').textContent = b.workTitle || 'عمل فني صوتي';
+      $('invService').textContent = b.service;
+      $('invSessionTime').textContent = `${formatDateArabic(b.date)} — ${formatTimeArabic(b.time)}`;
+      $('invDuration').textContent = `${b.duration || 1} ساعات عمل استوديو`;
+      $('invMaqam').textContent = b.maqam ? `مقام ${b.maqam}` : 'مقام حر / غير محدد';
+      $('invEngineer').textContent = b.engineer || 'م/ أحمد فاروق';
+
+      $('invTotalAmount').textContent = formatMoney(b.total);
+      $('invDepositAmount').textContent = formatMoney(b.deposit);
+      $('invRemainingAmount').textContent = formatMoney(rem);
+      $('invTafqeet').textContent = `فقط وقدره: ${numberToArabicWords(b.total)}`;
+      $('invNotesText').textContent = b.notes || 'لا توجد ملاحظات إضافية.';
+
+      $('invStatusPill').innerHTML = `<span class="status-badge status-${b.status}">${labels[b.status] || 'قيد التأكيد'}</span>`;
+
+      $('detailModal').classList.add('active');
+    };
+
+    $('btnPrintInvoice').addEventListener('click', () => window.print());
+    $('btnCloseDetailModal').addEventListener('click', () => $('detailModal').classList.remove('active'));
+    $('btnModalClose').addEventListener('click', () => $('detailModal').classList.remove('active'));
+
+    $('btnModalEdit').addEventListener('click', () => {
+      if (currentInvoiceBooking) {
+        $('detailModal').classList.remove('active');
+        editBooking(currentInvoiceBooking.id);
+      }
+    });
+
+    $('newUsername').value = localStorage.getItem(USERNAME_KEY) || DEFAULT_USERNAME;
+
+    $('changeCredentialsForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      const currentPassword = $('currentPassword').value;
+      const newUsername = $('newUsername').value.trim();
+      const newPassword = $('newPassword').value;
+      const confirmNewPassword = $('confirmNewPassword').value;
+      let savedUsername;
+      let savedPassword;
+
+      try {
+        savedUsername = localStorage.getItem(USERNAME_KEY) || DEFAULT_USERNAME;
+        savedPassword = localStorage.getItem(PASSWORD_KEY) || DEFAULT_PASSWORD;
+      } catch (err) {
+        showToast('تعذر قراءة بيانات الدخول الحالية من هذا المتصفح.', 'error');
+        return;
+      }
+
+      if (currentPassword !== savedPassword) {
+        showToast('كلمة المرور الحالية غير صحيحة.', 'error');
+        return;
+      }
+      if (!newUsername) {
+        showToast('اكتب اسم مستخدم صالحاً.', 'error');
+        return;
+      }
+      if (newPassword && newPassword.length < 8) {
+        showToast('يجب أن تتكون كلمة المرور الجديدة من 8 أحرف على الأقل.', 'error');
+        return;
+      }
+      if (newPassword && newPassword !== confirmNewPassword) {
+        showToast('تأكيد كلمة المرور الجديدة غير مطابق.', 'error');
+        return;
+      }
+      if (newPassword && newPassword === currentPassword) {
+        showToast('اختر كلمة مرور مختلفة عن الحالية.', 'error');
+        return;
+      }
+      if (newUsername === savedUsername && !newPassword) {
+        showToast('غيّر اسم المستخدم أو أدخل كلمة مرور جديدة.', 'error');
+        return;
+      }
+
+      try {
+        localStorage.setItem(USERNAME_KEY, newUsername);
+        if (newPassword) localStorage.setItem(PASSWORD_KEY, newPassword);
+      } catch (err) {
+        showToast('تعذر حفظ بيانات الدخول الجديدة في هذا المتصفح.', 'error');
+        return;
+      }
+
+      showToast('تم حفظ بيانات الدخول الجديدة. استخدمها في تسجيل الدخول القادم.', 'success');
+      $('loginUsername').value = newUsername;
+      $('currentPassword').value = '';
+      if (newPassword) {
+        $('changeCredentialsForm').reset();
+        $('newUsername').value = newUsername;
+      }
+    });
+
+    /* ========================================================================
+       13. WHATSAPP TEMPLATES SENDER
+       ======================================================================== */
+    window.sendWhatsAppModal = function(id) {
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      let phone = b.phone.replace(/\D/g, '');
+      if (phone.startsWith('01')) phone = '2' + phone;
+      if (!phone.startsWith('2') && phone.length === 10) phone = '20' + phone;
+
+      const rem = getRemaining(b);
+      const workStr = b.workTitle ? `\n🎵 *العمل الفني:* ${b.workTitle}` : '';
+      const maqamStr = b.maqam ? ` (مقام ${b.maqam})` : '';
+
+      const msg = 
+`*استوديو أَثَر للإنتاج الفني والتسجيل الصوتي* 🎙️✨
+السلام عليكم ورحمة الله وبركاته،
+أهلاً بك أخي الكريم / *${b.name}*
+
+يسعدنا تأكيد حجز جلستكم المباركة في استوديو أثر:
+📋 *نوع الخدمة:* ${b.service}${maqamStr}${workStr}
+📅 *تاريخ الجلسة:* ${formatDateArabic(b.date)}
+⏰ *وقت الحضور:* الساعة ${formatTimeArabic(b.time)}
+⏳ *مدة الحجز:* ${b.duration || 1} ساعات
+👤 *مهندس الصوت:* ${b.engineer || 'م/ أحمد فاروق'}
+
+💰 *الحسابات المالية:*
+- إجمالي التكلفة: ${formatMoney(b.total)}
+- العربون المسدد: ${formatMoney(b.deposit)}
+- المتبقي عند الجلسة: ${formatMoney(rem)}
+
+📍 *ملاحظة:* يرجى التكرم بالحضور قبل الموعد بـ 15 دقيقة لجاهزية الصوت.
+نتمنى لكم عملاً فنيًا رائعاً وموفقاً بإذن الله 🌟`;
+
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    };
+
+    $('btnModalWhatsApp').addEventListener('click', () => {
+      if (currentInvoiceBooking) {
+        sendWhatsAppModal(currentInvoiceBooking.id);
+      }
+    });
+
+    /* ========================================================================
+       14. INTERACTIVE CALENDAR & TIMELINE
+       ======================================================================== */
+    function renderCalendar() {
+      const year = currentCalDate.getFullYear();
+      const month = currentCalDate.getMonth();
+
+      const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+      $('calMonthTitleText').textContent = `${monthNames[month]} ${year}`;
+
+      const grid = $('calendarGrid');
+      grid.innerHTML = '';
+
+      const weekDays = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+      weekDays.forEach(day => {
+        const div = document.createElement('div');
+        div.className = 'cal-weekday';
+        div.textContent = day;
+        grid.appendChild(div);
+      });
+
+      const firstDayIndex = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const prevMonthTotalDays = new Date(year, month, 0).getDate();
+      const todayStr = getTodayISO();
+
+      for (let i = firstDayIndex - 1; i >= 0; i--) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-cell other-month';
+        cell.innerHTML = `<span class="cal-date-num">${prevMonthTotalDays - i}</span>`;
+        grid.appendChild(cell);
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const cell = document.createElement('div');
+        const dayISO = `${year}-${pad(month + 1)}-${pad(day)}`;
+
+        cell.className = 'cal-cell';
+        if (dayISO === todayStr) cell.classList.add('today');
+        if (dayISO === selectedCalDayStr) cell.classList.add('selected');
+
+        const dayBookings = bookings.filter(b => b.date === dayISO && b.status !== 'cancelled');
+        let dotsHTML = '';
+        if (dayBookings.length > 0) {
+          dotsHTML = `<div class="cal-dots">${dayBookings.slice(0, 4).map(() => `<span class="cal-dot"></span>`).join('')}</div>`;
+        }
+
+        cell.innerHTML = `
+          <span class="cal-date-num">${day}</span>
+          ${dotsHTML}
+        `;
+
+        cell.addEventListener('click', () => {
+          playBeep('click');
+          selectedCalDayStr = dayISO;
+          renderCalendar();
+          renderDayTimeline(dayISO);
+        });
+
+        grid.appendChild(cell);
+      }
+
+      renderDayTimeline(selectedCalDayStr);
+    }
+
+    function renderDayTimeline(dateISO) {
+      $('timelineDayLabel').textContent = `جدول مواعيد ${formatDateArabic(dateISO)}`;
+      const list = $('timelineHoursList');
+      list.innerHTML = '';
+
+      const dayBookings = bookings.filter(b => b.date === dateISO && b.status !== 'cancelled');
+      const hours = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
+
+      hours.forEach(time => {
+        const [th, tm] = time.split(':').map(Number);
+        const slotStart = th * 60 + tm;
+        const slotEnd = slotStart + 120;
+
+        const match = dayBookings.find(b => {
+          const [bh, bm] = (b.time || '17:00').split(':').map(Number);
+          const bStart = bh * 60 + bm;
+          const bEnd = bStart + (Number(b.duration) || 1) * 60;
+          return slotStart < bEnd && slotEnd > bStart;
+        });
+
+        const slotEl = document.createElement('div');
+        slotEl.className = 'timeline-slot';
+
+        if (match) {
+          slotEl.innerHTML = `
+            <div class="slot-time">${formatTimeArabic(time)}</div>
+            <div class="slot-content slot-busy">
+              <div>
+                <strong>${safeHTML(match.name)}</strong>
+                <span style="font-size: 11px; color: var(--gold-primary); margin-right: 8px;">${safeHTML(match.workTitle || match.service)}</span>
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <span class="status-badge status-${match.status}" onclick="cycleBookingStatus('${match.id}')">${labels[match.status]}</span>
+                <button class="topbar-btn" style="padding: 4px 8px; font-size: 11px;" onclick="viewInvoice('${match.id}')">تفاصيل</button>
+              </div>
+            </div>
+          `;
+        } else {
+          slotEl.innerHTML = `
+            <div class="slot-time">${formatTimeArabic(time)}</div>
+            <div class="slot-content slot-empty"><span>الفترة شاغرة ومتاحة للحجز</span></div>
+            <button class="topbar-btn" style="padding: 4px 10px; font-size: 11px;" onclick="quickBookAt('${dateISO}', '${time}')">+ حجز</button>
+          `;
+        }
+        list.appendChild(slotEl);
+      });
+    }
+
+    window.quickBookAt = function(date, time) {
+      switchTab('bookings');
+      resetForm();
+      $('bookingDate').value = date;
+      $('bookingTime').value = time;
+      $('bookingFormSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      $('clientName').focus();
+    };
+
+    $('calPrevMonth').addEventListener('click', () => { currentCalDate.setMonth(currentCalDate.getMonth() - 1); renderCalendar(); });
+    $('calNextMonth').addEventListener('click', () => { currentCalDate.setMonth(currentCalDate.getMonth() + 1); renderCalendar(); });
+    $('calTodayBtn').addEventListener('click', () => { currentCalDate = new Date(); selectedCalDayStr = getTodayISO(); renderCalendar(); });
+    $('btnQuickAddTimeline').addEventListener('click', () => quickBookAt(selectedCalDayStr, '18:00'));
+
+    /* ========================================================================
+       15. ANALYTICS & SVG CHARTS
+       ======================================================================== */
+    function renderAnalytics() {
+      const active = bookings.filter(b => b.status !== 'cancelled');
+
+      const serviceCounts = {};
+      active.forEach(b => {
+        serviceCounts[b.service] = (serviceCounts[b.service] || 0) + (Number(b.total) || 0);
+      });
+      const servicesArr = Object.entries(serviceCounts).sort((a, b) => b[1] - a[1]);
+      const maxServiceVal = servicesArr.length > 0 ? servicesArr[0][1] : 1;
+
+      let serviceBarsHTML = `<div style="display: flex; flex-direction: column; gap: 10px; padding: 10px 0;">`;
+      servicesArr.slice(0, 5).forEach(([srv, val], i) => {
+        const percent = Math.round((val / maxServiceVal) * 100);
+        const colors = ['var(--gold-primary)', 'var(--emerald-accent)', 'var(--blue-accent)', 'var(--purple-accent)', 'var(--amber-accent)'];
+        const c = colors[i % colors.length];
+
+        serviceBarsHTML += `
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span>${safeHTML(srv)}</span>
+              <strong>${formatMoney(val)}</strong>
+            </div>
+            <div style="width: 100%; height: 8px; border-radius: 4px; background: var(--bg-surface-hover); overflow: hidden;">
+              <div style="width: ${percent}%; height: 100%; background: ${c}; border-radius: 4px;"></div>
+            </div>
+          </div>
+        `;
+      });
+      serviceBarsHTML += `</div>`;
+      $('chartServicesWrap').innerHTML = serviceBarsHTML;
+
+      const dayLabels = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+      const dayCounts = [0, 0, 0, 0, 0, 0, 0];
+      active.forEach(b => {
+        const d = new Date(b.date + 'T12:00:00');
+        const dayIdx = d.getDay();
+        if (!isNaN(dayIdx)) dayCounts[dayIdx]++;
+      });
+
+      const maxDayCount = Math.max(...dayCounts, 1);
+      let daysChartHTML = `<div style="display: flex; align-items: flex-end; justify-content: space-between; height: 170px; padding: 10px 4px 0;">`;
+      dayCounts.forEach((count, i) => {
+        const heightPct = Math.max(12, Math.round((count / maxDayCount) * 100));
+        daysChartHTML += `
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1;">
+            <span style="font-size: 11px; font-weight: 800; color: var(--emerald-accent);">${count}</span>
+            <div style="width: 24px; height: ${heightPct}%; background: linear-gradient(180deg, var(--emerald-accent), rgba(16,185,129,0.3)); border-radius: 6px 6px 2px 2px;"></div>
+            <span style="font-size: 11px; color: var(--text-faint);">${dayLabels[i]}</span>
+          </div>
+        `;
+      });
+      daysChartHTML += `</div>`;
+      $('chartDaysWrap').innerHTML = daysChartHTML;
+
+      const maqamCounts = {};
+      active.forEach(b => { if (b.maqam) maqamCounts[b.maqam] = (maqamCounts[b.maqam] || 0) + 1; });
+      const maqamArr = Object.entries(maqamCounts).sort((a, b) => b[1] - a[1]);
+
+      let maqamHTML = '';
+      if (maqamArr.length === 0) {
+        maqamHTML = '<div style="color: var(--text-muted); font-size: 13px;">لا توجد مقامات مسجلة بعد.</div>';
+      } else {
+        maqamArr.slice(0, 4).forEach(([m, count]) => {
+          maqamHTML += `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; background: var(--bg-surface-hover); border-radius: var(--radius-sm);">
+              <span style="font-weight: 700; color: #c4b5fd;">مقام ${safeHTML(m)}</span>
+              <span class="tab-badge" style="background: rgba(139, 92, 246, 0.2); color: #a78bfa;">${count} أعمال فنية</span>
+            </div>
+          `;
+        });
+      }
+      $('maqamsStatsList').innerHTML = maqamHTML;
+
+      const totalRev = active.reduce((s, b) => s + (Number(b.total) || 0), 0);
+      const totalDep = active.reduce((s, b) => s + (Number(b.deposit) || 0), 0);
+      const totalRem = active.reduce((s, b) => s + getRemaining(b), 0);
+      const depPct = totalRev > 0 ? Math.round((totalDep / totalRev) * 100) : 0;
+      const remPct = 100 - depPct;
+
+      $('financialHealthWrap').innerHTML = `
+        <div style="text-align: center;">
+          <div style="font-size: 32px; font-weight: 900; color: var(--emerald-accent); font-family: var(--font-heading);">${depPct}%</div>
+          <div style="font-size: 12px; color: var(--text-muted);">نسبة التحصيل الفعلي</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--text-main); margin-top: 4px;">${formatMoney(totalDep)}</div>
+        </div>
+        <div style="width: 1px; height: 70px; background: var(--border-subtle);"></div>
+        <div style="text-align: center;">
+          <div style="font-size: 32px; font-weight: 900; color: var(--crimson-accent); font-family: var(--font-heading);">${remPct}%</div>
+          <div style="font-size: 12px; color: var(--text-muted);">المتبقي في ذمة العملاء</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--text-main); margin-top: 4px;">${formatMoney(totalRem)}</div>
+        </div>
+      `;
+    }
+
+    /* ========================================================================
+       16. LIVE STUDIO "ON AIR" SCREEN, VU METERS & WAVEFORM
+       ======================================================================== */
+    const canvas = $('waveformCanvas');
+    const ctx = canvas.getContext('2d');
+    let waveOffset = 0;
+
+    function updateVUMeters() {
+      const leftLeds = document.querySelectorAll('#vuMeterLeft .vu-led');
+      const rightLeds = document.querySelectorAll('#vuMeterRight .vu-led');
+
+      const leftPeak = isTimerRunning ? Math.min(8, Math.floor(Math.random() * 5) + 3) : 1;
+      const rightPeak = isTimerRunning ? Math.min(8, Math.floor(Math.random() * 5) + 2) : 1;
+
+      leftLeds.forEach((led, idx) => {
+        const ledType = idx < 5 ? 'green' : (idx < 7 ? 'yellow' : 'red');
+        if (idx < leftPeak) {
+          led.className = `vu-led ${ledType} on`;
+        } else {
+          led.className = 'vu-led';
+        }
+      });
+
+      rightLeds.forEach((led, idx) => {
+        const ledType = idx < 5 ? 'green' : (idx < 7 ? 'yellow' : 'red');
+        if (idx < rightPeak) {
+          led.className = `vu-led ${ledType} on`;
+        } else {
+          led.className = 'vu-led';
+        }
+      });
+    }
+
+    function drawWaveform() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const width = canvas.width;
+      const height = canvas.height;
+      const mid = height / 2;
+
+      ctx.beginPath();
+      ctx.strokeStyle = isTimerRunning ? 'rgba(239, 68, 68, 0.8)' : 'rgba(229, 184, 105, 0.4)';
+      ctx.lineWidth = 2;
+
+      const numBars = 48;
+      const barWidth = width / numBars;
+
+      for (let i = 0; i < numBars; i++) {
+        let amp = isTimerRunning
+          ? Math.sin(i * 0.35 + waveOffset) * 28 + Math.cos(i * 0.2 - waveOffset * 1.5) * 14
+          : Math.sin(i * 0.2 + waveOffset * 0.5) * 6;
+
+        amp = Math.abs(amp);
+        const x = i * barWidth;
+        const barH = Math.max(4, amp * 1.2);
+
+        const grad = ctx.createLinearGradient(0, mid - barH, 0, mid + barH);
+        if (isTimerRunning) {
+          grad.addColorStop(0, '#f87171');
+          grad.addColorStop(0.5, '#ef4444');
+          grad.addColorStop(1, '#991b1b');
+        } else {
+          grad.addColorStop(0, '#fbe2a8');
+          grad.addColorStop(0.5, '#e5b869');
+          grad.addColorStop(1, '#b88636');
+        }
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(x + 2, mid - barH / 2, barWidth - 4, barH);
+      }
+
+      waveOffset += isTimerRunning ? 0.12 : 0.03;
+      if (Math.random() < 0.3) updateVUMeters();
+      requestAnimationFrame(drawWaveform);
+    }
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let micStream = null;
+    let audioAnalyser = null;
+    let audioDataArray = null;
+    let recordedTakes = [];
+
+    function renderRecordedTakes() {
+      const section = $('recordedTakesSection');
+      const list = $('recordedTakesList');
+      const badge = $('takesCountBadge');
+      if (!section || !list) return;
+
+      if (recordedTakes.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'block';
+      if (badge) badge.textContent = `${recordedTakes.length} تيك مُسجّل`;
+
+      list.innerHTML = recordedTakes.map((take, idx) => {
+        const audioTag = take.audioUrl ? `
+          <audio controls class="take-audio-player" src="${take.audioUrl}"></audio>
+        ` : `<div style="font-size: 12px; color: var(--text-faint);">تم توثيق التيك في السجل الزمني (لم يتم التقاط صوت ميكروفون)</div>`;
+
+        const downloadBtn = take.audioUrl ? `
+          <a class="btn-take-action" href="${take.audioUrl}" download="أثر_تيك_${take.takeNumber}_${take.workTitle.replace(/\s+/g, '_')}.webm">
+            <span>💾</span>
+            <span>تنزيل التسجيل الصوتي</span>
+          </a>
+        ` : '';
+
+        return `
+          <div class="take-archive-card">
+            <div class="take-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="take-badge">🎙️ تيك (Take #${take.takeNumber})</span>
+                <strong style="color: var(--gold-primary); font-size: 13px;">${safeHTML(take.workTitle)}</strong>
+                <span style="font-size: 11px; color: var(--text-muted);">• ${safeHTML(take.artistName)}</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text-faint);">
+                <span>⏱️ المدة: ${take.duration}</span> | <span>${take.time}</span>
+              </div>
+            </div>
+            ${audioTag}
+            ${take.notes ? `<div style="font-size: 12px; color: #cbd5e1; background: rgba(0,0,0,0.35); padding: 7px 14px; border-radius: var(--radius-sm); border-right: 3px solid var(--gold-primary);">📝 ${safeHTML(take.notes)}</div>` : ''}
+            <div class="take-actions">
+              ${downloadBtn}
+              <button class="btn-take-action" style="color: #f87171;" onclick="deleteTake(${idx})">
+                <span>🗑️</span>
+                <span>حذف التيك</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.deleteTake = function(idx) {
+      if (confirm('هل أنت متأكد من حذف هذا التيك الصوتي؟')) {
+        playBeep('click');
+        recordedTakes.splice(idx, 1);
+        renderRecordedTakes();
+        showToast('تم حذف التيك بنجاح', 'info');
+      }
+    };
+
+    function drawWaveform() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const width = canvas.width;
+      const height = canvas.height;
+      const mid = height / 2;
+
+      const numBars = 48;
+      const barWidth = width / numBars;
+
+      if (isTimerRunning && audioAnalyser && audioDataArray) {
+        audioAnalyser.getByteFrequencyData(audioDataArray);
+        let sum = 0;
+        for (let i = 0; i < numBars; i++) {
+          const val = audioDataArray[i] || 0;
+          sum += val;
+          const barH = Math.max(4, (val / 255) * height * 0.9);
+          const x = i * barWidth;
+
+          const grad = ctx.createLinearGradient(0, mid - barH / 2, 0, mid + barH / 2);
+          grad.addColorStop(0, '#f87171');
+          grad.addColorStop(0.5, '#ef4444');
+          grad.addColorStop(1, '#991b1b');
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(x + 2, mid - barH / 2, barWidth - 4, barH);
+        }
+
+        const avg = sum / numBars;
+        const activeLeds = Math.min(8, Math.floor((avg / 100) * 8));
+        document.querySelectorAll('#vuMeterLeft .vu-led, #vuMeterRight .vu-led').forEach((led, idx) => {
+          led.classList.toggle('on', (idx % 8) < activeLeds);
+        });
+      } else {
+        ctx.beginPath();
+        for (let i = 0; i < numBars; i++) {
+          let amp = isTimerRunning
+            ? Math.sin(i * 0.35 + waveOffset) * 28 + Math.cos(i * 0.2 - waveOffset * 1.5) * 14
+            : Math.sin(i * 0.2 + waveOffset * 0.5) * 6;
+
+          amp = Math.abs(amp);
+          const x = i * barWidth;
+          const barH = Math.max(4, amp * 1.2);
+
+          const grad = ctx.createLinearGradient(0, mid - barH / 2, 0, mid + barH / 2);
+          if (isTimerRunning) {
+            grad.addColorStop(0, '#f87171');
+            grad.addColorStop(0.5, '#ef4444');
+            grad.addColorStop(1, '#991b1b');
+          } else {
+            grad.addColorStop(0, '#fbe2a8');
+            grad.addColorStop(0.5, '#e5b869');
+            grad.addColorStop(1, '#b88636');
+          }
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(x + 2, mid - barH / 2, barWidth - 4, barH);
+        }
+
+        waveOffset += isTimerRunning ? 0.12 : 0.03;
+        if (Math.random() < 0.3) updateVUMeters();
+      }
+
+      requestAnimationFrame(drawWaveform);
+    }
+    drawWaveform();
+
+    function formatStopwatch(sec) {
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      return `${pad(h)}:${pad(m)}:${pad(s)}`;
+    }
+
+    $('btnTimerToggle').addEventListener('click', async () => {
+      playBeep('record');
+      if (isTimerRunning) {
+        // STOP & SAVE TAKE
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        $('btnTimerIcon').textContent = '▶';
+        $('btnTimerText').textContent = `بدء تسجيل جديد (Take #${currentTake + 1})`;
+        $('btnTimerToggle').classList.remove('recording-active');
+        $('onairBadge').style.animation = 'none';
+
+        const finalSec = timerSeconds;
+        const durationStr = formatStopwatch(finalSec);
+        const takeNum = currentTake;
+        const takeNote = $('liveTakeNoteInput').value.trim();
+        const artist = $('onairArtistName').textContent.replace(/^المنشد:\s*/, '');
+        const work = $('onairWorkTitle').textContent.replace(/^العمل:\s*/, '');
+        const takeTime = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(audioChunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+            const audioUrl = URL.createObjectURL(blob);
+            recordedTakes.unshift({
+              takeNumber: takeNum,
+              workTitle: work,
+              artistName: artist,
+              duration: durationStr,
+              time: takeTime,
+              notes: takeNote,
+              audioUrl: audioUrl
+            });
+            renderRecordedTakes();
+            showToast(`تم إنهاء وحفظ التيك الصوتي (Take #${takeNum}) بنجاح! 🎙️🎉`, 'success');
+            audioChunks = [];
+          };
+          mediaRecorder.stop();
+        } else {
+          recordedTakes.unshift({
+            takeNumber: takeNum,
+            workTitle: work,
+            artistName: artist,
+            duration: durationStr,
+            time: takeTime,
+            notes: takeNote,
+            audioUrl: null
+          });
+          renderRecordedTakes();
+          showToast(`تم توثيق التيك (Take #${takeNum}) في السجل بنجاح! 🎙️`, 'success');
+        }
+
+        if (micStream) {
+          micStream.getTracks().forEach(track => track.stop());
+          micStream = null;
+        }
+
+        currentTake++;
+        $('onairTakeCounter').textContent = `المحاولة (Take #${currentTake})`;
+        $('liveTakeNoteInput').value = '';
+        timerSeconds = 0;
+        $('studioTimerDisplay').textContent = '00:00:00';
+      } else {
+        // START RECORDING
+        audioChunks = [];
+        try {
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+            let options = {};
+            if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+              options = { mimeType: 'audio/webm;codecs=opus' };
+            } else if (MediaRecorder.isTypeSupported('audio/webm')) {
+              options = { mimeType: 'audio/webm' };
+            }
+
+            mediaRecorder = new MediaRecorder(micStream, options);
+            mediaRecorder.ondataavailable = e => {
+              if (e.data && e.data.size > 0) audioChunks.push(e.data);
+            };
+            mediaRecorder.start(250);
+
+            try {
+              const AudioContext = window.AudioContext || window.webkitAudioContext;
+              if (AudioContext) {
+                if (!audioCtx) audioCtx = new AudioContext();
+                if (audioCtx.state === 'suspended') await audioCtx.resume();
+                const source = audioCtx.createMediaStreamSource(micStream);
+                audioAnalyser = audioCtx.createAnalyser();
+                audioAnalyser.fftSize = 128;
+                audioDataArray = new Uint8Array(audioAnalyser.frequencyBinCount);
+                source.connect(audioAnalyser);
+              }
+            } catch (e) {}
+          }
+        } catch (err) {
+          console.log('[Audio Recorder] Mic not accessible, using timer:', err.message);
+          mediaRecorder = null;
+        }
+
+        isTimerRunning = true;
+        $('btnTimerIcon').textContent = '⏹';
+        $('btnTimerText').textContent = `إنهاء وحفظ التيك (Take #${currentTake})`;
+        $('btnTimerToggle').classList.add('recording-active');
+        $('onairBadge').style.animation = 'onAirPulse 1s infinite';
+
+        timerSeconds = 0;
+        $('studioTimerDisplay').textContent = '00:00:00';
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          $('studioTimerDisplay').textContent = formatStopwatch(timerSeconds);
+        }, 1000);
+
+        showToast(`بدء التسجيل الحي للمحاولة (Take #${currentTake}) داخل الاستوديو 🔴🎙️`, 'info');
+      }
+    });
+
+    $('btnTimerReset').addEventListener('click', () => {
+      playBeep('click');
+      clearInterval(timerInterval);
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+      if (micStream) {
+        micStream.getTracks().forEach(track => track.stop());
+        micStream = null;
+      }
+      isTimerRunning = false;
+      timerSeconds = 0;
+      $('studioTimerDisplay').textContent = '00:00:00';
+      $('btnTimerIcon').textContent = '▶';
+      $('btnTimerText').textContent = `بدء التسجيل (Take #${currentTake})`;
+      $('btnTimerToggle').classList.remove('recording-active');
+      $('onairBadge').style.animation = 'none';
+      updateVUMeters();
+    });
+
+    $('btnNextTake').addEventListener('click', () => {
+      playBeep('click');
+      currentTake++;
+      $('onairTakeCounter').textContent = `المحاولة (Take #${currentTake})`;
+      $('btnTimerText').textContent = `بدء التسجيل (Take #${currentTake})`;
+      showToast(`تجهيز محاولة جديدة (Take #${currentTake})`, 'info');
+    });
+
+    $('btnFullscreenToggle').addEventListener('click', () => {
+      const elem = $('onairContainer');
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen?.().catch(() => {});
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    });
+
+    /* ========================================================================
+       17. STUDIO RATE CALCULATOR LOGIC
+       ======================================================================== */
+    function calculateStudioRate() {
+      const hours = Number($('calcHoursRange').value) || 2;
+      $('calcHoursLabel').textContent = `${hours} ساعة`;
+
+      const hourlyRate = 400;
+      let total = hours * hourlyRate;
+      total += Number($('calcRoomSelect').value) || 0;
+
+      if ($('calcAddonMix').checked) total += Number($('calcAddonMix').value);
+      if ($('calcAddonTuning').checked) total += Number($('calcAddonTuning').value);
+      if ($('calcAddonChoir').checked) total += Number($('calcAddonChoir').value);
+      if ($('calcAddonVideo').checked) total += Number($('calcAddonVideo').value);
+
+      const deposit = Math.round(total * 0.5);
+
+      $('calcTotalResult').textContent = formatMoney(total);
+      $('calcDepositResult').textContent = formatMoney(deposit);
+
+      return { hours, total, deposit };
+    }
+
+    $('calcHoursRange').addEventListener('input', calculateStudioRate);
+    $('calcRoomSelect').addEventListener('change', calculateStudioRate);
+    ['calcAddonMix', 'calcAddonTuning', 'calcAddonChoir', 'calcAddonVideo'].forEach(id => {
+      $(id).addEventListener('change', calculateStudioRate);
+    });
+
+    $('btnOpenCalculator').addEventListener('click', () => {
+      playBeep('click');
+      calculateStudioRate();
+      $('calcModal').classList.add('active');
+    });
+
+    $('btnCloseCalcModal').addEventListener('click', () => $('calcModal').classList.remove('active'));
+
+    $('btnApplyCalcToForm').addEventListener('click', () => {
+      playBeep('click');
+      const calc = calculateStudioRate();
+      switchTab('bookings');
+      $('sessionDuration').value = String(calc.hours);
+      $('totalPrice').value = calc.total;
+      $('depositPaid').value = calc.deposit;
+      updateMoneyPreview();
+      $('calcModal').classList.remove('active');
+      $('bookingFormSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast('تم نقل التكلفة المحسوبة إلى نموذج الحجز بنجاح', 'success');
+    });
+
+    /* ========================================================================
+       18. TOOLS & BACKUP
+       ======================================================================== */
+    $('btnExportJSON').addEventListener('click', () => {
+      playBeep('click');
+      const blob = new Blob([JSON.stringify(bookings, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `نسخة_احتياطية_استوديو_أثر_${getTodayISO()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('تم تنزيل النسخة الاحتياطية بنجاح', 'success');
+    });
+
+    $('importFileInput').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const imported = JSON.parse(ev.target.result);
+          if (Array.isArray(imported)) {
+            bookings = imported;
+            persistData();
+            renderAll();
+            showToast('تمت استعادة البيانات بنجاح!', 'success');
+          } else {
+            showToast('ملف غير صالح، يجب أن يحتوي على مصفوفة حجوزات.', 'error');
+          }
+        } catch {
+          showToast('تعذر قراءة ملف JSON.', 'error');
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    $('btnLoadDemoData').addEventListener('click', () => {
+      if (confirm('هل تريد استبدال الحجوزات الحالية بنماذج بيانات الاستوديو التجريبية؟')) {
+        playBeep('success');
+        bookings = JSON.parse(JSON.stringify(DEMO_BOOKINGS));
+        persistData();
+        renderAll();
+        showToast('تم تحميل البيانات التجريبية الفخمة للاستوديو بنجاح 🎉', 'success');
+      }
+    });
+
+    $('btnClearAllData').addEventListener('click', () => {
+      if (confirm('تحذير: هل تريد مسح جميع الحجوزات والبدء بسجل فارغ تماماً؟')) {
+        playBeep('click');
+        bookings = [];
+        persistData();
+        renderAll();
+        showToast('تم تفريغ السجل بالكامل', 'info');
+      }
+    });
+
+    /* ========================================================================
+       19. THEME & SOUND CONTROLS
+       ======================================================================== */
+    function initTheme() {
+      const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      $('themeIcon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+    }
+
+    $('btnToggleTheme').addEventListener('click', () => {
+      playBeep('click');
+      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem(THEME_KEY, next);
+      $('themeIcon').textContent = next === 'dark' ? '🌙' : '☀️';
+      showToast(`تم التبديل إلى الوضع ${next === 'dark' ? 'الليلي الفاخر' : 'النهاري المضيء'}`);
+    });
+
+    $('btnToggleSound').addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem(SOUND_KEY, soundEnabled ? '1' : '0');
+      $('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+      showToast(soundEnabled ? 'تم تفعيل المؤثرات الصوتية للاستوديو' : 'تم كتم المؤثرات الصوتية');
+      if (soundEnabled) playBeep('click');
+    });
+
+    /* ========================================================================
+       20. TAB NAVIGATION & VIEW SWITCHERS
+       ======================================================================== */
+    function switchTab(tabId) {
+      playBeep('click');
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.tab === tabId);
+      });
+      document.querySelectorAll('.tab-content').forEach(c => {
+        c.style.display = c.id === `tab-${tabId}` ? 'block' : 'none';
+      });
+
+      if (tabId === 'calendar') renderCalendar();
+      if (tabId === 'analytics') renderAnalytics();
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    $('btnLiveOnAir').addEventListener('click', () => switchTab('onair'));
+    $('btnTopNewBooking').addEventListener('click', () => {
+      switchTab('bookings');
+      resetForm();
+      $('bookingFormSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      $('clientName').focus();
+    });
+
+    $('viewModeTable').addEventListener('click', () => {
+      playBeep('click');
+      currentViewMode = 'table';
+      $('viewModeTable').classList.add('active');
+      $('viewModeCards').classList.remove('active');
+      $('tableContainer').style.display = 'block';
+      $('cardsGridContainer').style.display = 'none';
+    });
+
+    $('viewModeCards').addEventListener('click', () => {
+      playBeep('click');
+      currentViewMode = 'cards';
+      $('viewModeCards').classList.add('active');
+      $('viewModeTable').classList.remove('active');
+      $('tableContainer').style.display = 'none';
+      $('cardsGridContainer').style.display = 'grid';
+    });
+
+    ['searchInput', 'filterStatus', 'filterService', 'filterDate'].forEach(id => {
+      $(id).addEventListener(id === 'searchInput' ? 'input' : 'change', renderBookings);
+    });
+
+    document.querySelectorAll('.chip-btn').forEach(chip => {
+      chip.addEventListener('click', () => {
+        playBeep('click');
+        document.querySelectorAll('.chip-btn').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeFilter = chip.dataset.chip;
+        renderBookings();
+      });
+    });
+
+    ['totalPrice', 'depositPaid'].forEach(id => $(id).addEventListener('input', updateMoneyPreview));
+    ['bookingDate', 'bookingTime', 'sessionDuration'].forEach(id => {
+      $(id).addEventListener('change', auditFormConflicts);
+      $(id).addEventListener('input', auditFormConflicts);
+    });
+    $('btnResetForm').addEventListener('click', resetForm);
+
+    /* ========================================================================
+       21. CLOCK & GLOBAL INITIALIZATION
+       ======================================================================== */
+    function updateClock() {
+      const now = new Date();
+      const h = pad(now.getHours());
+      const m = pad(now.getMinutes());
+      const s = pad(now.getSeconds());
+      $('studioClock').textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Keyboard navigation between screens: Alt+1 to Alt+5
+    document.addEventListener('keydown', e => {
+      if (e.altKey) {
+        if (e.key === '1') { e.preventDefault(); switchTab('bookings'); }
+        if (e.key === '2') { e.preventDefault(); switchTab('calendar'); }
+        if (e.key === '3') { e.preventDefault(); switchTab('analytics'); }
+        if (e.key === '4') { e.preventDefault(); switchTab('onair'); }
+        if (e.key === '5') { e.preventDefault(); switchTab('tools'); }
+      }
+    });
+
+
+    
+    /* ========================================================================
+       ON AIR SESSION SELECTOR & SYNC
+       ======================================================================== */
+    function updateOnAirSelector() {
+      const sel = $('onairSessionSelect');
+      if (!sel) return;
+      const currentVal = sel.value;
+      sel.innerHTML = '<option value="">-- اختر من الحجوزات الحالية للتحميل المباشر --</option>';
+      bookings.filter(b => b.status !== 'cancelled').forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b.id;
+        opt.textContent = `${b.name} - ${b.workTitle || b.service} (${formatDateArabic(b.date)})`;
+        sel.appendChild(opt);
+      });
+      if (currentVal) sel.value = currentVal;
+    }
+
+    window.loadSessionToOnAir = function(id) {
+      if (!id) return;
+      const b = bookings.find(x => x.id === id);
+      if (!b) return;
+
+      $('onairArtistName').textContent = `المنشد: ${b.name}`;
+      $('onairWorkTitle').textContent = `العمل: ${b.workTitle || b.service}`;
+      $('onairMaqam').textContent = `المقام: ${b.maqam || 'حر'}`;
+      $('onairEngineer').textContent = `المهندس: ${b.engineer || 'م/ أحمد فاروق'}`;
+      showToast(`تم تحميل بيانات جلسة "${b.name}" لشاشة البث المباشر بنجاح! 🎙️`, 'success');
+    };
+
+    function renderAll() {
+      renderKPIs();
+      renderBookings();
+      updateOnAirSelector();
+    }
+
+    initTheme();
+    loadData();
+    resetForm();
+    renderAll();
+
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
